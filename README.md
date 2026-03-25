@@ -7,7 +7,9 @@ O projeto visa o desenvolvimento de um aplicativo web que facilite a busca, a co
 ## :technologist: Membros da equipe
 
 581908 - MATHEUS DE SOUSA MENDES - ES
+
 579500 - NYCOLAS RIBEIRO OLIVEIRA - ES
+
 579915 - YURI FAGUNDES DA SILVA - ES
 
 ## :bulb: Objetivo Geral
@@ -17,20 +19,27 @@ A aplicação permitirá que usuários encontrem profissionais de acordo com sua
 
 ## :eyes: Público-Alvo
 Clientes (contratantes)
+
 Trabalhadores Autônomos
 
 ## :star2: Impacto Esperado
 Para trabalhadores:
+
 Melhorar a visibilidade de seus serviços, facilitar contato com clientes e garantir mais oportunidades de prestação de serviço
 
+
 Para clientes:
+
 Reduzir a dificuldade de encontrar profissionais, centralizar contratação de serviços e garantir que  o processo seja mais rápido e seguro
 
 ## :people_holding_hands: Papéis ou tipos de usuário da aplicação
 
 Usuário não-logado (visitante)
+
 Cliente (autenticado)
+
 Trabalhador (autenticado)
+
 Administrador
 
 > Tenha em mente que obrigatoriamente a aplicação deve possuir funcionalidades acessíveis a todos os tipos de usuário e outra funcionalidades restritas a certos tipos de usuários.
@@ -38,34 +47,42 @@ Administrador
 ## :triangular_flag_on_post:	 Principais funcionalidades da aplicação
 
 Funcionalidades acessíveis
-RF01: Permitir a visualização de trabalhadores cadastrados
-RF02: Listar os serviços disponíveis para os clientes
-RF03: Disponibilizar busca e filtro por tipo de serviço
-RF04: Permitir visualização de descrição de serviços e experiência dos profissionais
+
+* RF01: Permitir a visualização de trabalhadores cadastrados
+* RF02: Listar os serviços disponíveis para os clientes
+* RF03: Disponibilizar busca e filtro por tipo de serviço
+* RF04: Permitir visualização de descrição de serviços e experiência dos profissionais
 
 Funcionalidade restritas
+
 Cliente
-RF05: Permitir contratação de serviços
-RF06: Permitir a visualização do histórico de serviços solicitados/concluídos
-RF07: Garantir a possibilidade do acompanhamento do status dos serviços em andamento
-RF08: Liberar o envio de mensagens para trabalhadores
+
+* RF05: Permitir contratação de serviços
+* RF06: Permitir a visualização do histórico de serviços solicitados/concluídos
+* RF07: Garantir a possibilidade do acompanhamento do status dos serviços em andamento
+* RF08: Liberar o envio de mensagens para trabalhadores
 
 Trabalhadores
-RF09: Permitir o cadastro, edição e remoção de serviços pelo trabalhador  
-RF10: Permitir a visualização dos pedidos recebidos  
-RF11: Permitir aceitar ou recusar solicitações de serviços  
+
+* RF09: Permitir o cadastro, edição e remoção de serviços pelo trabalhador  
+* RF10: Permitir a visualização dos pedidos recebidos  
+* RF11: Permitir aceitar ou recusar solicitações de serviços  
 
 Administrador
-RF12: Permitir a visualização de todos os usuários cadastrados
-RF13: Permitir a remoção de usuários da plataforma
-RF14: Permitir a visualização e remoção de serviços cadastrados
-RF15: Permitir a visualização de todos os pedidos realizados na plataforma
+
+* RF12: Permitir a visualização de todos os usuários cadastrados
+* RF13: Permitir a remoção de usuários da plataforma
+* RF14: Permitir a visualização e remoção de serviços cadastrados
+* RF15: Permitir a visualização de todos os pedidos realizados na plataforma
 
 ## :spiral_calendar: Entidades ou tabelas do sistema
 
 Usuário
+
 Trabalhador
+
 Serviço Oferecido
+
 Contratação
 
 

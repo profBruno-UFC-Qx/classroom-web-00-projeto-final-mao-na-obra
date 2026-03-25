@@ -1,35 +1,73 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/IDEzcQ6G)
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=23250858)
-# :checkered_flag: NOME DO PROJETO
+# :checkered_flag: ContratAki
 
-Breve descrição do que o seu projeto faz.
+O projeto visa o desenvolvimento de um aplicativo web que facilite a busca, a contratação e a comunicação com trabalhadores autônomos, promovendo uma conexão mais eficiente entre clientes e prestadores de serviço na cidade de Quixadá. A proposta surge da necessidade de centralizar, em uma única plataforma, informações sobre profissionais de diferentes áreas, como manutenção, serviços domésticos e reparos em geral.
 
 ## :technologist: Membros da equipe
 
-Matrícula, nome e curso dos participantes.
+581908 - MATHEUS DE SOUSA MENDES - ES
+579500 - NYCOLAS RIBEIRO OLIVEIRA - ES
+579915 - YURI FAGUNDES DA SILVA - ES
 
 ## :bulb: Objetivo Geral
-Descrever o objetivo de geral do projeto
+Desenvolver uma aplicação web que conecte trabalhadores autônomos a clientes, facilitando a busca, contratação e comunicação entre as partes, por meio de uma plataforma intuitiva, acessível e segura.
+
+A aplicação permitirá que usuários encontrem profissionais de acordo com suas necessidades, visualizem serviços disponíveis e realizem contratações de forma prática, enquanto os trabalhadores poderão divulgar seus serviços e gerenciar solicitações recebidas.
 
 ## :eyes: Público-Alvo
-Público-alvo do projeto
+Clientes (contratantes)
+Trabalhadores Autônomos
 
 ## :star2: Impacto Esperado
-Descreva o impacto esperado do projeto em relação ao público alvo
+Para trabalhadores:
+Melhorar a visibilidade de seus serviços, facilitar contato com clientes e garantir mais oportunidades de prestação de serviço
+
+Para clientes:
+Reduzir a dificuldade de encontrar profissionais, centralizar contratação de serviços e garantir que  o processo seja mais rápido e seguro
 
 ## :people_holding_hands: Papéis ou tipos de usuário da aplicação
 
-Informe aqui os tipos de usuário que irão interagir com a aplicação. Ex: administrador, locador, locatario, usuário não logado.
+Usuário não-logado (visitante)
+Cliente (autenticado)
+Trabalhador (autenticado)
+Administrador
 
 > Tenha em mente que obrigatoriamente a aplicação deve possuir funcionalidades acessíveis a todos os tipos de usuário e outra funcionalidades restritas a certos tipos de usuários.
 
 ## :triangular_flag_on_post:	 Principais funcionalidades da aplicação
 
-Descreva ou liste brevemente as principais funcionalidades da aplicação que será desenvolvida. Destaque a funcionalidades que serão acessíveis a todos os usuários e aquelas restritas a usuários logados.
+Funcionalidades acessíveis
+RF01: Permitir a visualização de trabalhadores cadastrados
+RF02: Listar os serviços disponíveis para os clientes
+RF03: Disponibilizar busca e filtro por tipo de serviço
+RF04: Permitir visualização de descrição de serviços e experiência dos profissionais
+
+Funcionalidade restritas
+Cliente
+RF05: Permitir contratação de serviços
+RF06: Permitir a visualização do histórico de serviços solicitados/concluídos
+RF07: Garantir a possibilidade do acompanhamento do status dos serviços em andamento
+RF08: Liberar o envio de mensagens para trabalhadores
+
+Trabalhadores
+RF09: Permitir o cadastro, edição e remoção de serviços pelo trabalhador  
+RF10: Permitir a visualização dos pedidos recebidos  
+RF11: Permitir aceitar ou recusar solicitações de serviços  
+
+
+Administrador
+RF12: Permitir a visualização de todos os usuários cadastrados
+RF13: Permitir a remoção de usuários da plataforma
+RF14: Permitir a visualização e remoção de serviços cadastrados
+RF15: Permitir a visualização de todos os pedidos realizados na plataforma
 
 ## :spiral_calendar: Entidades ou tabelas do sistema
 
-Liste as principais entidades do sistema.
+Usuário
+Trabalhador
+Serviço Oferecido
+Contratação
 
 
 ----

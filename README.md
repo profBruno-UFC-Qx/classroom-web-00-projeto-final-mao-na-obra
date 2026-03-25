@@ -55,7 +55,6 @@ RF09: Permitir o cadastro, edição e remoção de serviços pelo trabalhador
 RF10: Permitir a visualização dos pedidos recebidos  
 RF11: Permitir aceitar ou recusar solicitações de serviços  
 
-
 Administrador
 RF12: Permitir a visualização de todos os usuários cadastrados
 RF13: Permitir a remoção de usuários da plataforma

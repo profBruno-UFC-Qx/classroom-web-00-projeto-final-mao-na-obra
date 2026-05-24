@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContratAki</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="border-bottom bg-white">
+      <div class="container d-flex flex-wrap align-items-center justify-content-between py-2">
+          <h1 class="logo fs-3 fw-bold m-0">
+              <a href="index.html" class="text-primary text-decoration-none">ContratAki</a>
+          </h1>
+          <nav aria-label="Menu principal">
+              <ul class="nav">
+                  <li class="nav-item"><a href="#inicio" class="nav-link">Início</a></li>
+                  <li class="nav-item"><a href="#categorias" class="nav-link">Categorias</a></li>
+                  <li class="nav-item"><a href="#dashboard" class="nav-link">Dashboard</a></li>
+                  <li class="nav-item"><a href="#mensagens" class="nav-link">Mensagens</a></li>
+              </ul>
+          </nav>
+          <aside class="d-flex gap-3 align-items-center">
+              <a href="#perfil" class="text-decoration-none">Perfil</a>
+              <button class="btn btn-primary">Logout</button>
+          </aside>
+      </div>
+  </header>
+
+  <main>
+      <!-- Texto inicial -->
+      <section id="inicio" class="hero text-center">
+          <div class="container">
+              <h2 class="display-4 fw-bold mb-4">Encontre o profissional certo para a sua necessidade</h2>
+              <p class="text-secondary mb-4">
+                  Contrate eletricistas, designers, cuidadores, professores e muito mais em poucos cliques, com a segurança que você precisa e merece.
+              </p>
+          </div>
+      </section>
+
+      <!-- Barra de pesquisa -->
+      <section id="busca" class="container mb-5">
+          <form class="d-flex gap-2 mx-auto" style="max-width: 500px;" role="search">
+              <label for="servico_procurado" class="visually-hidden">Serviço Procurado</label>
+              <input type="text" id="servico_procurado" class="form-control" placeholder="Procurar serviços (ex: Manicure, Encanador...)">
+              <button type="submit" class="btn btn-primary">Buscar Agora</button>
+          </form>
+      </section>
+
+      <!-- Categorias -->
+      <section id="categorias" class="container py-5">
+          <h2 class="mb-4">Categorias</h2>
+          <ul class="d-flex flex-wrap gap-3" style="list-style: none; padding-left: 0;">
+              <li style="flex: 1 0 150px;">
+                  <a href="#" class="category-card d-block">
+                      <i class="bi bi-briefcase fs-1"></i>
+                      <h3>Serviços Gerais</h3>
+                  </a>
+              </li>
+              <li style="flex: 1 0 150px;">
+                  <a href="#" class="category-card d-block">
+                      <i class="bi bi-tools fs-1"></i>
+                      <h3>Reparos Elétricos</h3>
+                  </a>
+              </li>
+              <li style="flex: 1 0 150px;">
+                  <a href="#" class="category-card d-block">
+                      <i class="bi bi-laptop fs-1"></i>
+                      <h3>Tecnologia</h3>
+                  </a>
+              </li>
+              <li style="flex: 1 0 150px;">
+                  <a href="#" class="category-card d-block">
+                      <i class="bi bi-palette fs-1"></i>
+                      <h3>Design e Arte</h3>
+                  </a>
+              </li>
+              <li style="flex: 1 0 150px;">
+                  <a href="#" class="category-card d-block">
+                      <i class="bi bi-heart fs-1"></i>
+                      <h3>Beleza</h3>
+                  </a>
+              </li>
+              <li style="flex: 1 0 150px;">
+                  <a href="#" class="category-card d-block">
+                      <i class="bi bi-book fs-1"></i>
+                      <h3>Reforço Escolar</h3>
+                  </a>
+              </li>
+          </ul>
+      </section>
+
+      <!-- Profissionais -->
+      <section id="profissionais" class="container py-5">
+          <h2 class="mb-4">Profissionais em Destaque</h2>
+          <ul class="d-flex flex-wrap gap-4" style="list-style: none; padding-left: 0;">
+              <li style="flex: 1 0 250px;">
+                  <article class="professional-card text-center h-100">
+                      <img src="https://picsum.photos/id/64/100/100" alt="Rodrigo Lima" class="rounded-circle mb-3" width="100" height="100">
+                      <h3>Rodrigo Lima</h3>
+                      <p class="text-secondary">Serviços Gerais</p>
+
+                      <!-- Modificar estrelas de avaliação posteriormente -->
+                      <div class="rating" aria-label="5 estrelas, 234 avaliações">⭐⭐⭐⭐⭐ (234)</div>
+                  </article>
+              </li>
+              <li style="flex: 1 0 250px;">
+                  <article class="professional-card text-center h-100">
+                      <img src="https://picsum.photos/id/65/100/100" alt="kayky Martins" class="rounded-circle mb-3" width="100" height="100">
+                      <h3>kayky Martins</h3>
+                      <p class="text-secondary">Eletricista</p>
+
+                      <!-- Modificar estrelas de avaliação posteriormente -->
+                      <div class="rating" aria-label="5 estrelas, 56 avaliações">⭐⭐⭐⭐⭐ (56)</div>
+                  </article>
+              </li>
+              <li style="flex: 1 0 250px;">
+                  <article class="professional-card text-center h-100">
+                      <img src="https://picsum.photos/id/66/100/100" alt="Jaqueline Costa" class="rounded-circle mb-3" width="100" height="100">
+                      <h3>Jaqueline Costa</h3>
+                      <p class="text-secondary">Design e Arte</p>
+
+                      <!-- Modificar estrelas de avaliação posteriormente -->
+                      <div class="rating" aria-label="5 estrelas, 128 avaliações">⭐⭐⭐⭐⭐ (128)</div>
+                  </article>
+              </li>
+          </ul>
+      </section>
+
+      <!-- Cadastro do profissional -->
+      <section id="cadastro_profissional" class="container py-5">
+          <div class="cta">
+              <h2>Quer oferecer seus serviços?</h2>
+              <p class="mb-3">Junte-se a milhares de profissionais que aumentaram sua renda com o ContratAki. Simples, rápido e seguro.</p>
+              <button class="btn btn-light">Cadastre-se Aqui</button>
+          </div>
+      </section>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer py-4">
+      <div class="container">
+          <h2 class="fs-4">ContratAki</h2>
+          <p>A plataforma líder para contratação de serviços profissionais com confiança.</p>
+          <nav aria-label="Links institucionais">
+              <ul class="list-unstyled d-flex gap-3">
+                  <li><a href="#" class="text-decoration-none">Sobre Nós</a></li>
+                  <li><a href="#" class="text-decoration-none">Privacidade</a></li>
+                  <li><a href="#" class="text-decoration-none">Termos de Uso</a></li>
+                  <li><a href="#" class="text-decoration-none">Contato</a></li>
+              </ul>
+          </nav>
+          <p class="mt-3 small text-secondary">© 2026 ContratAki. Todos os direitos reservados.</p>
+      </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

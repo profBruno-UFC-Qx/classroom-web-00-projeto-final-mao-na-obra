@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "servicos",
+  "info": {
+    "singularName": "servico",
+    "pluralName": "servicos",
+    "displayName": "Servico"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titulo": {
+      "type": "string"
+    },
+    "preco": {
+      "type": "decimal"
+    },
+    "descricao": {
+      "type": "blocks"
+    },
+    "trabalhador": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::trabalhador.trabalhador"
+    },
+    "categoria": {
+      "type": "enumeration",
+      "enum": [
+        "Jardinagem",
+        "Limpeza",
+        "Manutenção",
+        "Construção",
+        "Eletricista",
+        "Encanador",
+        "Pintor"
+      ]
+    }
+  }
+}

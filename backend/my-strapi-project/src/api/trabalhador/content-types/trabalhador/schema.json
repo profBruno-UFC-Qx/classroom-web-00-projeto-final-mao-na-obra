@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "trabalhadors",
+  "info": {
+    "singularName": "trabalhador",
+    "pluralName": "trabalhadors",
+    "displayName": "Trabalhador"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome_completo": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email"
+    },
+    "endereco": {
+      "type": "string"
+    },
+    "complemento": {
+      "type": "string"
+    },
+    "telefone": {
+      "type": "string",
+      "required": true
+    },
+    "preco": {
+      "type": "decimal"
+    },
+    "categoria": {
+      "type": "enumeration",
+      "enum": [
+        "Jardinagem",
+        "Limpeza",
+        "Manutenção",
+        "Construção",
+        "Eletricista",
+        "Encanador",
+        "Pintor"
+      ]
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

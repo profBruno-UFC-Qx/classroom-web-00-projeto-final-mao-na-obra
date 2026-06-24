@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "clientes",
+  "info": {
+    "singularName": "cliente",
+    "pluralName": "clientes",
+    "displayName": "Cliente"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome_completo": {
+      "type": "string",
+      "required": true
+    },
+    "telefone": {
+      "type": "string"
+    },
+    "endereco": {
+      "type": "string"
+    },
+    "complemento": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "tipo": {
+      "type": "enumeration",
+      "default": "Cliente",
+      "enum": [
+        "Cliente",
+        "Trabalhador"
+      ]
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+#camposTrabalhador {
+    display: none;
+}
+
+#camposTrabalhador.ativo {
+    display: block;
+}

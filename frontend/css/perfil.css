@@ -1,0 +1,96 @@
+/* ===== ESTILOS PADRÃO DO SISTEMA ===== */
+
+.marca-sistema {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+body {
+    background: #f5f7fb;
+}
+
+.rodape {
+    background: #04142e;
+    color: white;
+}
+
+/* ===== ESTILOS DO PERFIL ===== */
+
+.perfil-profissional {
+    padding: 2rem 0;
+}
+
+.foto-perfil {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #0d6efd;
+}
+
+.card-informacao {
+    background-color: #0d6efd;
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 10px;
+    transition: transform .2s;
+}
+
+.card-informacao:hover {
+    transform: scale(1.02);
+}
+
+.card-informacao h2 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.card-informacao p {
+    margin: 0;
+}
+
+.lista-servicos-oferecidos {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.lista-servicos-oferecidos li {
+    background-color: #0d6efd;
+    color: white;
+    padding: 0.75rem;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background .2s;
+}
+
+.lista-servicos-oferecidos li:hover {
+    background-color: #0b5ed7;
+}
+
+.profissional-verificado {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1rem;
+    background-color: #f8f9fa;
+}
+
+.profissional-verificado h3 {
+    color: #0d6efd;
+    font-size: 1.1rem;
+}
+
+.card {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+    transition: .2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}

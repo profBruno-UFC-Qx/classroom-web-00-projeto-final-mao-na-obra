@@ -34,6 +34,12 @@
     },
     "ativo": {
       "type": "boolean"
+    },
+    "prestador": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::perfil.perfil",
+      "inversedBy": "servicos"
     }
   }
 }

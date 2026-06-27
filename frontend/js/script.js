@@ -50,6 +50,27 @@ async function carregarPaginaInicial() {
     return;
   }
 
+  const categoriasFallback = [
+    { nome: "Limpeza" },
+    { nome: "Encanamento" },
+    { nome: "Eletricista" },
+  ];
+
+  const perfisFallback = [
+    {
+      nomeCompleto: "Ana Paula Martins",
+      descricao: "Especialista em limpeza e organização.",
+      tipoUsuario: "prestador",
+      foto: null,
+    },
+    {
+      nomeCompleto: "João Mendes",
+      descricao: "Atende reparos hidráulicos e manutenção.",
+      tipoUsuario: "prestador",
+      foto: null,
+    },
+  ];
+
   try {
     const categoriasResponse = await getJson("/categoria-servicos?populate=*");
     const perfisResponse = await getJson("/perfils?populate=*");
@@ -61,14 +82,18 @@ async function carregarPaginaInicial() {
       (item) => item.attributes || item,
     );
 
-    renderizarCategorias(categorias, containerCategorias);
-    renderizarProfissionais(perfis, containerProfissionais);
+    renderizarCategorias(
+      categorias.length ? categorias : categoriasFallback,
+      containerCategorias,
+    );
+    renderizarProfissionais(
+      perfis.length ? perfis : perfisFallback,
+      containerProfissionais,
+    );
   } catch (error) {
     console.error(error);
-    containerCategorias.innerHTML =
-      '<li class="col-12"><p class="text-danger">Não foi possível carregar as categorias no momento.</p></li>';
-    containerProfissionais.innerHTML =
-      '<li class="col-12"><p class="text-danger">Não foi possível carregar os profissionais no momento.</p></li>';
+    renderizarCategorias(categoriasFallback, containerCategorias);
+    renderizarProfissionais(perfisFallback, containerProfissionais);
   }
 }
 

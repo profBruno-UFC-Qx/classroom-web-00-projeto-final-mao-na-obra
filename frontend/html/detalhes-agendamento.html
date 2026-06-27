@@ -1,141 +1,182 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ContratAki - Detalhes do Agendamento</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="detalhes-agendamento.css">
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="detalhes-agendamento.css" />
+  </head>
 
-<body>
-
+  <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3" aria-label="Navegação principal">
-            <div class="container">
-                <a class="navbar-brand marca-sistema" href="index.html">ContratAki</a>
+      <nav
+        class="navbar navbar-expand-lg navbar-dark bg-primary py-3"
+        aria-label="Navegação principal"
+      >
+        <div class="container">
+          <a class="navbar-brand marca-sistema" href="index.html">ContratAki</a>
 
-                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-expanded="false" aria-controls="menuPrincipal">
-                    <span class="navbar-toggler-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Menu</span>
-                </button>
+          <button
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#menuPrincipal"
+            aria-expanded="false"
+            aria-controls="menuPrincipal"
+          >
+            <span class="navbar-toggler-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Menu</span>
+          </button>
 
-                <div class="collapse navbar-collapse" id="menuPrincipal">
-                    <ul class="navbar-nav me-auto ms-4">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Início</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#" aria-current="page">Agendamentos</a>
-                        </li>
-                    </ul>
+          <div class="collapse navbar-collapse" id="menuPrincipal">
+            <ul class="navbar-nav me-auto ms-4">
+              <li class="nav-item">
+                <a class="nav-link" href="tela-inicial-oficial.html">Início</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#" aria-current="page"
+                  >Agendamentos</a
+                >
+              </li>
+            </ul>
 
-                    <form role="search" class="d-flex me-3">
-                        <input class="form-control" type="search" placeholder="Buscar..." aria-label="Buscar agendamentos">
-                    </form>
+            <form role="search" class="d-flex me-3">
+              <input
+                class="form-control"
+                type="search"
+                placeholder="Buscar..."
+                aria-label="Buscar agendamentos"
+              />
+            </form>
 
-                    <button class="btn btn-outline-light" aria-label="Perfil do usuário">Perfil</button>
-                </div>
-            </div>
-            
-        </nav>
+            <a
+              class="btn btn-outline-light"
+              href="perfil.html"
+              aria-label="Perfil do usuário"
+            >
+              Perfil
+            </a>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <main class="container py-5">
+      <header class="d-flex justify-content-between align-items-start mb-4">
+        <div>
+          <nav aria-label="Navegação secundária">
+            <a href="agendamentos-cliente.html" class="text-decoration-none"
+              >← Voltar para Agendamentos</a
+            >
+          </nav>
+          <h1 class="fw-bold mt-3">Detalhes do Agendamento</h1>
+          <p class="text-secondary">Agendamento #2026-0018</p>
+        </div>
+        <span class="status-agendamento status-aceito" role="status"
+          >Aceito</span
+        >
+      </header>
 
-        <header class="d-flex justify-content-between align-items-start mb-4">
-            <div>
-                <nav aria-label="Navegação secundária">
-                    <a href="agendamentos-cliente.html" class="text-decoration-none">← Voltar para Agendamentos</a>
-                </nav>
-                <h1 class="fw-bold mt-3">Detalhes do Agendamento</h1>
-                <p class="text-secondary">Agendamento #2026-0018</p>
+      <section class="row">
+        <article class="col-lg-8">
+          <section class="card cartao-detalhes mb-4">
+            <header class="card-body">
+              <h2>Profissional</h2>
+              <figure class="d-flex gap-4 mt-3">
+                <img
+                  src="https://picsum.photos/100"
+                  class="foto-profissional"
+                  alt="Foto de Ana Lima"
+                />
+                <figcaption>
+                  <a href="perfil.html" class="text-decoration-none text-dark">
+                    <h3>Ana Lima</h3>
+                  </a>
+                  <span class="badge bg-primary">Diarista</span>
+                  <p class="mt-2" aria-label="Avaliação 5 estrelas">
+                    ★★★★★ 5.0
+                  </p>
+                  <p>(11) 98765-4321</p>
+                </figcaption>
+              </figure>
+            </header>
+          </section>
+
+          <section class="card cartao-detalhes mb-4">
+            <div class="card-body">
+              <h2>Serviço</h2>
+              <hr />
+              <dl>
+                <dt>Serviço</dt>
+                <dd>Limpeza Residencial Completa</dd>
+
+                <dt>Valor</dt>
+                <dd>R$80,00</dd>
+
+                <dt>Data</dt>
+                <dd>18/06/2026</dd>
+
+                <dt>Horário</dt>
+                <dd>08:00</dd>
+              </dl>
             </div>
-            <span class="status-agendamento status-aceito" role="status">Aceito</span>
-        </header>
+          </section>
 
-        <section class="row">
+          <section class="card cartao-detalhes">
+            <div class="card-body">
+              <h2>Observações</h2>
+              <p>
+                Limpeza completa da residência, incluindo quartos, sala, cozinha
+                e banheiros.
+              </p>
+            </div>
+          </section>
+        </article>
 
-            <article class="col-lg-8">
+        <aside class="col-lg-4">
+          <section class="card cartao-detalhes">
+            <header class="card-body">
+              <h2>Linha do Tempo</h2>
+              <ol class="linha-tempo">
+                <li class="concluido">Solicitação enviada</li>
+                <li class="concluido">Em análise</li>
+                <li class="ativo">Aceita</li>
+                <li class="pendente">Concluída</li>
+              </ol>
 
-                <section class="card cartao-detalhes mb-4">
-                    <header class="card-body">
-                        <h2>Profissional</h2>
-                        <figure class="d-flex gap-4 mt-3">
-                            <img src="https://picsum.photos/100" class="foto-profissional" alt="Foto de Ana Lima">
-                            <figcaption>
-                                <a href="perfil.html" class="text-decoration-none text-dark">
-                                    <h3>Ana Lima</h3>
-                                </a>
-                                <span class="badge bg-primary">Diarista</span>
-                                <p class="mt-2" aria-label="Avaliação 5 estrelas">★★★★★ 5.0</p>
-                                <p>(11) 98765-4321</p>
-                            </figcaption>
-                        </figure>
-                    </header>
-                </section>
-
-                <section class="card cartao-detalhes mb-4">
-                    <div class="card-body">
-                        <h2>Serviço</h2>
-                        <hr>
-                        <dl>
-                            <dt>Serviço</dt>
-                            <dd>Limpeza Residencial Completa</dd>
-
-                            <dt>Valor</dt>
-                            <dd>R$80,00</dd>
-
-                            <dt>Data</dt>
-                            <dd>18/06/2026</dd>
-
-                            <dt>Horário</dt>
-                            <dd>08:00</dd>
-                        </dl>
-                    </div>
-                </section>
-
-                <section class="card cartao-detalhes">
-                    <div class="card-body">
-                        <h2>Observações</h2>
-                        <p>Limpeza completa da residência, incluindo quartos, sala, cozinha e banheiros.</p>
-                    </div>
-                </section>
-
-            </article>
-
-            <aside class="col-lg-4">
-
-                <section class="card cartao-detalhes">
-                    <header class="card-body">
-                        <h2>Linha do Tempo</h2>
-                        <ol class="linha-tempo">
-                            <li class="concluido">Solicitação enviada</li>
-                            <li class="concluido">Em análise</li>
-                            <li class="ativo">Aceita</li>
-                            <li class="pendente">Concluída</li>
-                        </ol>
-
-                        <button id="botaoReagendar" class="btn btn-primary w-100 mt-4" aria-label="Reagendar serviço">Reagendar Serviço</button>
-                        <button id="botaoCancelar" class="btn btn-outline-danger w-100 mt-3" aria-label="Cancelar agendamento">Cancelar Agendamento</button>
-                    </header>
-                </section>
-
-            </aside>
-
-        </section>
-
+              <button
+                id="botaoReagendar"
+                class="btn btn-primary w-100 mt-4"
+                aria-label="Reagendar serviço"
+              >
+                Reagendar Serviço
+              </button>
+              <button
+                id="botaoCancelar"
+                class="btn btn-outline-danger w-100 mt-3"
+                aria-label="Cancelar agendamento"
+              >
+                Cancelar Agendamento
+              </button>
+            </header>
+          </section>
+        </aside>
+      </section>
     </main>
 
     <footer class="rodape py-5 mt-5">
-        <div class="container">
-            <h2 class="fs-4">ContratAki</h2>
-            <p>© 2026 ContratAki. Todos os direitos reservados.</p>
-        </div>
+      <div class="container">
+        <h2 class="fs-4">ContratAki</h2>
+        <p>© 2026 ContratAki. Todos os direitos reservados.</p>
+      </div>
     </footer>
 
-    <script src="detalhes-agendamento.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/detalhes-agendamento.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+  </body>
 </html>

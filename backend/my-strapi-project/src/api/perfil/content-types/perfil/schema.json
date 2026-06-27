@@ -23,36 +23,29 @@
     "foto": {
       "type": "media",
       "multiple": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "tipoUsuario": {
       "type": "enumeration",
-      "enum": [
-        "cliente ",
-        "prestador"
-      ]
+      "enum": ["cliente", "prestador"]
     },
     "solicitacoesComoCliente": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::solicitacao.solicitacao",
-      "inversedBy": "cliente"
+      "mappedBy": "cliente"
     },
     "servicos": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::servico.servico"
+      "target": "api::servico.servico",
+      "mappedBy": "prestador"
     },
     "solicitacoesComoPrestador": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "oneToMany",
       "target": "api::solicitacao.solicitacao",
-      "inversedBy": "prestador"
+      "mappedBy": "prestador"
     }
   }
 }

@@ -561,15 +561,15 @@ export interface ApiPerfilPerfil extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     servicos: Schema.Attribute.Relation<'oneToMany', 'api::servico.servico'>;
     solicitacoesComoCliente: Schema.Attribute.Relation<
-      'oneToOne',
+      'oneToMany',
       'api::solicitacao.solicitacao'
     >;
     solicitacoesComoPrestador: Schema.Attribute.Relation<
-      'manyToOne',
+      'oneToMany',
       'api::solicitacao.solicitacao'
     >;
     telefone: Schema.Attribute.String;
-    tipoUsuario: Schema.Attribute.Enumeration<['cliente ', 'prestador']>;
+    tipoUsuario: Schema.Attribute.Enumeration<['cliente', 'prestador']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -610,6 +610,7 @@ export interface ApiServicoServico extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     preco: Schema.Attribute.Decimal;
+    prestador: Schema.Attribute.Relation<'manyToOne', 'api::perfil.perfil'>;
     publishedAt: Schema.Attribute.DateTime;
     titulo: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -629,7 +630,7 @@ export interface ApiSolicitacaoSolicitacao extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    cliente: Schema.Attribute.Relation<'oneToOne', 'api::perfil.perfil'>;
+    cliente: Schema.Attribute.Relation<'manyToOne', 'api::perfil.perfil'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -642,7 +643,7 @@ export interface ApiSolicitacaoSolicitacao extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     mensagem: Schema.Attribute.Blocks;
-    prestador: Schema.Attribute.Relation<'oneToMany', 'api::perfil.perfil'>;
+    prestador: Schema.Attribute.Relation<'manyToOne', 'api::perfil.perfil'>;
     publishedAt: Schema.Attribute.DateTime;
     statusSolicitacao: Schema.Attribute.Enumeration<
       ['PENDENTE', 'ACEITA', 'RECUSADA', 'CONCLUIDA']

@@ -1,0 +1,69 @@
+/* ===== Agendamento Cliente ===== */
+
+.marca-sistema {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+body {
+    background: #f5f7fb;
+}
+
+.rodape {
+    background: #04142e;
+    color: white;
+}
+
+/* ===== ESTILOS DOS AGENDAMENTOS ===== */
+
+.cartao-agendamento {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+    transition: .2s;
+}
+
+.cartao-agendamento:hover {
+    transform: translateY(-2px);
+}
+
+.foto-profissional {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.status-pendente {
+    background: #fff3cd;
+    color: #856404;
+    padding: .35rem .8rem;
+    border-radius: 999px;
+    font-size: .9rem;
+    font-weight: 600;
+    height: fit-content;
+}
+
+.status-aceito {
+    background: #d1f7dc;
+    color: #198754;
+    padding: .35rem .8rem;
+    border-radius: 999px;
+    font-size: .9rem;
+    font-weight: 600;
+    height: fit-content;
+}
+
+.status-concluido {
+    background: #dbeafe;
+    color: #0d6efd;
+    padding: .35rem .8rem;
+    border-radius: 999px;
+    font-size: .9rem;
+    font-weight: 600;
+    height: fit-content;
+}
+
+.botao-filtro {
+    border-radius: 50px;
+}

@@ -1,0 +1,53 @@
+/* ===== ESTILOS PADRÃO DO SISTEMA ===== */
+
+.marca-sistema {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+body {
+    background: #f5f7fb;
+}
+
+.rodape {
+    background: #04142e;
+    color: white;
+}
+
+/* ===== ESTILOS DOS AGENDAMENTOS ===== */
+
+.card-agendamento {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+}
+
+.foto-cliente {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.status {
+    height: fit-content;
+    padding: .35rem .8rem;
+    border-radius: 999px;
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.status-confirmado {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-pendente {
+    background: #fff3cd;
+    color: #664d03;
+}
+
+.status-cancelado {
+    background: #f8d7da;
+    color: #842029;
+}

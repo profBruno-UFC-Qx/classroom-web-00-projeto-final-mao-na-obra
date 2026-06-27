@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações da Conta</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="conf.css">
+</head>
+<body class="bg-light min-vh-100 d-flex justify-content-center py-5">
+
+    <main class="area-central w-100 px-3">
+        
+        <header class="mb-4">
+            <h2 class="fw-bold h3">Configurações</h2>
+            <p class="text-muted">Gerencie as informações da sua conta</p>
+        </header>
+
+        <section class="bg-white p-4 rounded shadow-sm border mb-4">
+            <h3 class="h6 mb-4 text-primary fw-bold"> Dados da Conta</h3>
+            
+            <form id="formDados">
+            
+                <fieldset class="mb-3">
+                    <label for="nome" class="form-label text-muted small fw-bold">Nome completo</label>
+                    <input type="text" class="form-control" id="nome" >
+                </fieldset>
+
+                <fieldset class="mb-3">
+                    <label for="email" class="form-label text-muted small fw-bold">E-mail</label>
+                    <input type="email" class="form-control" id="email">
+                </fieldset>
+
+                <fieldset class="mb-4">
+                    <label for="telefone" class="form-label text-muted small fw-bold">Telefone</label>
+                    <input type="tel" class="form-control" id="telefone" placeholder="(11) 98765-4321">
+                </fieldset>
+
+                <button type="submit" class="btn btn-primary px-4">Salvar Alterações</button>
+            </form>
+        </section>
+
+        <section class="bg-white p-4 rounded shadow-sm border mb-4">
+            <h3 class="h6 mb-4 text-primary fw-bold"> Segurança</h3>
+            
+            <form id="formSeguranca">
+                <fieldset class="mb-3">
+                    <label for="novaSenha" class="form-label text-muted small fw-bold">Nova senha</label>
+                    <input type="password" class="form-control" id="novaSenha" placeholder="Mínimo 6 caracteres">
+                </fieldset>
+
+                <fieldset class="mb-4">
+                    <label for="confirmarSenha" class="form-label text-muted small fw-bold">Confirmar senha</label>
+                    <input type="password" class="form-control" id="confirmarSenha" placeholder="Repita a nova senha">
+                </fieldset>
+
+                <button type="submit" class="btn btn-primary px-4">Alterar Senha</button>
+            </form>
+        </section>
+
+        <section class="bg-white p-4 rounded shadow-sm border mb-4">
+            <h3 class="h6 mb-4 text-secondary fw-bold"> Conta</h3>
+
+            <article class="d-flex justify-content-between align-items-center p-3 border rounded mb-3">
+                <section>
+                    <strong class="d-block text-dark">Sair da Conta</strong>
+                    <span class="text-muted small">Encerra sua sessão atual neste dispositivo</span>
+                </section>
+                <button type="button" class="btn btn-outline-secondary px-4" id="btnSair">Sair</button>
+            </article>
+
+            <article class="d-flex justify-content-between align-items-center p-3 border border-danger rounded bg-danger bg-opacity-10">
+                <section>
+                    <strong class="d-block text-danger">Excluir Conta</strong>
+                    <span class="text-danger small">Remove permanentemente todos os seus dados</span>
+                </section>
+                <button type="button" class="btn btn-outline-danger px-4" id="btnExcluir"> Excluir</button>
+            </article>
+        </section>
+
+    </main>
+
+    <script src="conf.js"></script>
+</body>
+</html>

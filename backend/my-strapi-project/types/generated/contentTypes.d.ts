@@ -469,186 +469,34 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiAgendamentoAgendamento extends Struct.CollectionTypeSchema {
-  collectionName: 'agendamentos';
+export interface ApiCategoriaServicoCategoriaServico
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'categoria_servicos';
   info: {
-    displayName: 'Agendamento';
-    pluralName: 'agendamentos';
-    singularName: 'agendamento';
+    displayName: 'CategoriaServico';
+    pluralName: 'categoria-servicos';
+    singularName: 'categoria-servico';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    cliente: Schema.Attribute.Relation<'oneToOne', 'api::cliente.cliente'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    data: Schema.Attribute.Date & Schema.Attribute.Required;
-    horario: Schema.Attribute.String & Schema.Attribute.Required;
+    Descricao: Schema.Attribute.Blocks;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::agendamento.agendamento'
+      'api::categoria-servico.categoria-servico'
     > &
       Schema.Attribute.Private;
-    observacoes: Schema.Attribute.Blocks;
+    nome: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    situacao: Schema.Attribute.Enumeration<
-      ['pendente', 'aceito', 'recusado', 'concluido', 'cancelado']
-    > &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'pendente'>;
-    trabalhador: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::trabalhador.trabalhador'
-    >;
+    servicos: Schema.Attribute.Relation<'oneToMany', 'api::servico.servico'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    valor_estimado: Schema.Attribute.Decimal;
-  };
-}
-
-export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
-  collectionName: 'articles';
-  info: {
-    description: 'Create your blog content';
-    displayName: 'Article';
-    pluralName: 'articles';
-    singularName: 'article';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    author: Schema.Attribute.Relation<'manyToOne', 'api::author.author'>;
-    blocks: Schema.Attribute.DynamicZone<
-      ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
-    >;
-    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
-    cover: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 80;
-      }>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::article.article'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'>;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
-  collectionName: 'authors';
-  info: {
-    description: 'Create authors for your content';
-    displayName: 'Author';
-    pluralName: 'authors';
-    singularName: 'author';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
-    avatar: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::author.author'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
-  collectionName: 'categories';
-  info: {
-    description: 'Organize your content into categories';
-    displayName: 'Category';
-    pluralName: 'categories';
-    singularName: 'category';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::category.category'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiClienteCliente extends Struct.CollectionTypeSchema {
-  collectionName: 'clientes';
-  info: {
-    displayName: 'Cliente';
-    pluralName: 'clientes';
-    singularName: 'cliente';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    complemento: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.Email;
-    endereco: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::cliente.cliente'
-    > &
-      Schema.Attribute.Private;
-    nome_completo: Schema.Attribute.String & Schema.Attribute.Required;
-    publishedAt: Schema.Attribute.DateTime;
-    telefone: Schema.Attribute.String;
-    tipo: Schema.Attribute.Enumeration<['Cliente', 'Trabalhador']> &
-      Schema.Attribute.DefaultTo<'Cliente'>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    users_permissions_user: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
   };
 }
 
@@ -684,6 +532,50 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiPerfilPerfil extends Struct.CollectionTypeSchema {
+  collectionName: 'perfils';
+  info: {
+    displayName: 'perfil';
+    pluralName: 'perfils';
+    singularName: 'perfil';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descricao: Schema.Attribute.Blocks;
+    foto: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::perfil.perfil'
+    > &
+      Schema.Attribute.Private;
+    nomeCompleto: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    servicos: Schema.Attribute.Relation<'oneToMany', 'api::servico.servico'>;
+    solicitacoesComoCliente: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::solicitacao.solicitacao'
+    >;
+    solicitacoesComoPrestador: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::solicitacao.solicitacao'
+    >;
+    telefone: Schema.Attribute.String;
+    tipoUsuario: Schema.Attribute.Enumeration<['cliente ', 'prestador']>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiServicoServico extends Struct.CollectionTypeSchema {
   collectionName: 'servicos';
   info: {
@@ -695,6 +587,7 @@ export interface ApiServicoServico extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    ativo: Schema.Attribute.Boolean;
     categoria: Schema.Attribute.Enumeration<
       [
         'Jardinagem',
@@ -719,61 +612,44 @@ export interface ApiServicoServico extends Struct.CollectionTypeSchema {
     preco: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     titulo: Schema.Attribute.String;
-    trabalhador: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::trabalhador.trabalhador'
-    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
   };
 }
 
-export interface ApiTrabalhadorTrabalhador extends Struct.CollectionTypeSchema {
-  collectionName: 'trabalhadors';
+export interface ApiSolicitacaoSolicitacao extends Struct.CollectionTypeSchema {
+  collectionName: 'solicitacaos';
   info: {
-    displayName: 'Trabalhador';
-    pluralName: 'trabalhadors';
-    singularName: 'trabalhador';
+    displayName: 'Solicitacao';
+    pluralName: 'solicitacaos';
+    singularName: 'solicitacao';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    categoria: Schema.Attribute.Enumeration<
-      [
-        'Jardinagem',
-        'Limpeza',
-        'Manuten\u00E7\u00E3o',
-        'Constru\u00E7\u00E3o',
-        'Eletricista',
-        'Encanador',
-        'Pintor',
-      ]
-    >;
-    complemento: Schema.Attribute.String;
+    cliente: Schema.Attribute.Relation<'oneToOne', 'api::perfil.perfil'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.Email;
+    dataDesejada: Schema.Attribute.Date;
     endereco: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::trabalhador.trabalhador'
+      'api::solicitacao.solicitacao'
     > &
       Schema.Attribute.Private;
-    nome_completo: Schema.Attribute.String & Schema.Attribute.Required;
-    preco: Schema.Attribute.Decimal;
+    mensagem: Schema.Attribute.Blocks;
+    prestador: Schema.Attribute.Relation<'oneToMany', 'api::perfil.perfil'>;
     publishedAt: Schema.Attribute.DateTime;
-    telefone: Schema.Attribute.String & Schema.Attribute.Required;
+    statusSolicitacao: Schema.Attribute.Enumeration<
+      ['PENDENTE', 'ACEITA', 'RECUSADA', 'CONCLUIDA']
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    users_permissions_user: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
   };
 }
 
@@ -1233,7 +1109,6 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1258,6 +1133,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    perfil: Schema.Attribute.Relation<'oneToOne', 'api::perfil.perfil'>;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
@@ -1289,14 +1165,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
-      'api::agendamento.agendamento': ApiAgendamentoAgendamento;
-      'api::article.article': ApiArticleArticle;
-      'api::author.author': ApiAuthorAuthor;
-      'api::category.category': ApiCategoryCategory;
-      'api::cliente.cliente': ApiClienteCliente;
+      'api::categoria-servico.categoria-servico': ApiCategoriaServicoCategoriaServico;
       'api::global.global': ApiGlobalGlobal;
+      'api::perfil.perfil': ApiPerfilPerfil;
       'api::servico.servico': ApiServicoServico;
-      'api::trabalhador.trabalhador': ApiTrabalhadorTrabalhador;
+      'api::solicitacao.solicitacao': ApiSolicitacaoSolicitacao;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "perfils",
+  "info": {
+    "singularName": "perfil",
+    "pluralName": "perfils",
+    "displayName": "perfil"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nomeCompleto": {
+      "type": "string"
+    },
+    "telefone": {
+      "type": "string"
+    },
+    "descricao": {
+      "type": "blocks"
+    },
+    "foto": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "tipoUsuario": {
+      "type": "enumeration",
+      "enum": [
+        "cliente ",
+        "prestador"
+      ]
+    },
+    "solicitacoesComoCliente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::solicitacao.solicitacao",
+      "inversedBy": "cliente"
+    },
+    "servicos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::servico.servico"
+    },
+    "solicitacoesComoPrestador": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::solicitacao.solicitacao",
+      "inversedBy": "prestador"
+    }
+  }
+}

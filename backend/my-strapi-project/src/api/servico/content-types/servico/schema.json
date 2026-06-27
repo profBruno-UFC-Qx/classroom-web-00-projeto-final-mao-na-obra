@@ -20,11 +20,6 @@
     "descricao": {
       "type": "blocks"
     },
-    "trabalhador": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::trabalhador.trabalhador"
-    },
     "categoria": {
       "type": "enumeration",
       "enum": [
@@ -36,6 +31,9 @@
         "Encanador",
         "Pintor"
       ]
+    },
+    "ativo": {
+      "type": "boolean"
     }
   }
 }

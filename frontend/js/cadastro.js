@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
           ],
           tipoUsuario,
-          users_permissions_user: user.id,
+          users_permissions_user: { connect: user.id },
         },
       };
 
@@ -75,7 +75,9 @@ document.addEventListener("DOMContentLoaded", () => {
           perfilPayload,
         );
 
-        perfil = perfilResponse?.data || null;
+        perfil = perfilResponse?.data
+          ? { id: perfilResponse.data.id, ...perfilResponse.data.attributes }
+          : null;
       } catch (profileError) {
         console.warn(
           "Não foi possível criar o perfil automaticamente.",

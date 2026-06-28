@@ -44,6 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error("Resposta de autenticação inválida.");
       }
 
+      // Store the token before profile fetch so getJson can send authorization if needed.
+      saveAuthSession(user, token);
+
       let profile = null;
 
       try {
@@ -58,8 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ...profileResponse.data[0].attributes,
               }
             : null;
-      }
-      catch (profileError) {
+      } catch (profileError) {
         console.warn(profileError);
       }
 

@@ -1,6 +1,33 @@
 document.addEventListener("DOMContentLoaded", async () => {
   redirectIfUnauthenticated(["login.html", "cadastro.html"]);
 
+  const nomeUsuario = document.querySelector(".perfil-usuario h6");
+const tipoUsuario = document.querySelector(".perfil-usuario small");
+const botaoSair = document.getElementById("botaoSair");
+
+const perfil = getStoredProfile();
+const usuario = getStoredUser();
+
+if (nomeUsuario) {
+  nomeUsuario.textContent =
+    perfil?.nomeCompleto ||
+    perfil?.attributes?.nomeCompleto ||
+    usuario?.username ||
+    "Usuário";
+}
+
+if (tipoUsuario) {
+  tipoUsuario.textContent =
+    perfil?.tipoUsuario ||
+    perfil?.attributes?.tipoUsuario ||
+    "cliente";
+}
+
+botaoSair?.addEventListener("click", () => {
+  clearAuthSession();
+  window.location.href = "login.html";
+});
+
   const listaAgendamentos = document.querySelector(".lista-agendamentos");
   const botoesFiltro = document.querySelectorAll(".botao-filtro");
 

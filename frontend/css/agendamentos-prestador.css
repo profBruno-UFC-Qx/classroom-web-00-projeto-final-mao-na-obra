@@ -14,6 +14,29 @@ body {
     color: white;
 }
 
+.menu-perfil{
+    width:220px;
+    border:none;
+    border-radius:14px;
+    padding:.5rem 0;
+    box-shadow:0 4px 15px rgba(0,0,0,.12);
+}
+
+.perfil-usuario{
+    padding:.5rem 1rem;
+}
+
+.dropdown-item{
+    display:flex;
+    align-items:center;
+    gap:.7rem;
+    padding:.7rem 1rem;
+}
+
+.dropdown-item:hover{
+    background:#f5f7fb;
+}
+
 /* ===== ESTILOS DOS AGENDAMENTOS ===== */
 
 .card-agendamento {

@@ -55,18 +55,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const perfilPayload = {
         data: {
           nomeCompleto: nome,
-          telefone,
-          descricao: [
-            { type: "paragraph", children: [{ text: complemento || "" }] },
-          ],
-          tipoUsuario: tipoUsuario === "prestador" ? "prestador" : "cliente",
+          telefone: telefone,
+          descricao: complemento || "",
+          tipoUsuario: tipoUsuario,
+          users_permissions_user: user.id,
         },
       };
 
       let perfil = null;
 
       try {
-        const perfilResponse = await postJson(`/perfils`, perfilPayload);
+        const perfilResponse = await postJson(
+          "/perfils",
+          perfilPayload,
+        );
+
         perfil = perfilResponse?.data || null;
       } catch (profileError) {
         console.warn(

@@ -10,18 +10,27 @@ document.addEventListener("DOMContentLoaded", async () => {
   let usuarioAtual = getStoredUser();
 
   try {
-    const response = await getJson("/perfils?populate=*");
-    perfilAtual = (response?.data || [])[0];
+  const response = await getJson(
+    `/perfils?filters[users_permissions_user][id][$eq]=${usuarioAtual.id}&populate=*`
+  );
 
-    if (perfilAtual) {
-      const dados = perfilAtual.attributes || perfilAtual;
-      document.getElementById("nome").value = dados.nomeCompleto || "";
-      document.getElementById("email").value = usuarioAtual?.email || "";
-      document.getElementById("telefone").value = dados.telefone || "";
-    }
-  } catch (error) {
-    console.error(error);
+  perfilAtual = response?.data?.[0] || null;
+
+  if (perfilAtual) {
+    const dados = perfilAtual.attributes || perfilAtual;
+
+    document.getElementById("nome").value =
+      dados.nomeCompleto || "";
+
+    document.getElementById("email").value =
+      usuarioAtual?.email || "";
+
+    document.getElementById("telefone").value =
+      dados.telefone || "";
   }
+} catch (error) {
+  console.error(error);
+}
 
   formDados?.addEventListener("submit", async (evento) => {
     evento.preventDefault();
@@ -37,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             nomeCompleto: nome,
             telefone,
             descricao: [{ type: "paragraph", children: [{ text: "" }] }],
-            tipoUsuario: "cliente ",
+            tipoUsuario: "cliente",
           },
         });
       } else {
@@ -46,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             nomeCompleto: nome,
             telefone,
             descricao: [{ type: "paragraph", children: [{ text: "" }] }],
-            tipoUsuario: "cliente ",
+            tipoUsuario: "cliente",
           },
         });
         perfilAtual = resposta?.data || null;

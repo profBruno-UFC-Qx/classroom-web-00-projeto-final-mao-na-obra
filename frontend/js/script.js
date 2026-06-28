@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  redirectIfUnauthenticated(["login.html", "cadastro.html"]);
+  //redirectIfUnauthenticated(["login.html", "cadastro.html"]);
 
   const linkAgendamentos = document.querySelector("#linkAgendamentos");
 
@@ -18,13 +18,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     const perfil = getStoredProfile();
     const usuario = getStoredUser();
 
-    if (perfil?.attributes?.nomeCompleto || usuario?.username) {
-      nomeUsuario.textContent =
-        perfil?.attributes?.nomeCompleto || usuario?.username || "Usuário";
+    const nome =
+      perfil?.nomeCompleto ||
+      perfil?.attributes?.nomeCompleto ||
+      usuario?.username;
+
+    if (nomeUsuario) {
+      nomeUsuario.textContent = nome;
     }
 
-    if (perfil?.attributes?.tipoUsuario) {
-      tipoUsuario.textContent = perfil.attributes.tipoUsuario;
+    if (tipoUsuario) {
+      tipoUsuario.textContent =
+        perfil?.tipoUsuario ||
+        perfil?.attributes?.tipoUsuario ||
+        "cliente";
     }
   }
 

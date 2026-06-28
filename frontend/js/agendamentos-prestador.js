@@ -2,6 +2,33 @@ document.addEventListener("DOMContentLoaded", async () => {
   const filtros = document.querySelectorAll(".filtro-agendamento");
   const container = document.querySelector(".row.mt-4 .col-12");
 
+  const nomeUsuario = document.querySelector(".perfil-usuario h6");
+const tipoUsuario = document.querySelector(".perfil-usuario small");
+const botaoSair = document.getElementById("botaoSair");
+
+const perfil = getStoredProfile();
+const usuario = getStoredUser();
+
+if (nomeUsuario) {
+  nomeUsuario.textContent =
+    perfil?.nomeCompleto ||
+    perfil?.attributes?.nomeCompleto ||
+    usuario?.username ||
+    "Usuário";
+}
+
+if (tipoUsuario) {
+  tipoUsuario.textContent =
+    perfil?.tipoUsuario ||
+    perfil?.attributes?.tipoUsuario ||
+    "prestador";
+}
+
+botaoSair?.addEventListener("click", () => {
+  clearAuthSession();
+  window.location.href = "login.html";
+});
+
   if (!container) {
     return;
   }

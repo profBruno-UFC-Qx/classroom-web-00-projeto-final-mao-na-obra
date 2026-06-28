@@ -1,0 +1,7 @@
+#camposTrabalhador {
+  display: none;
+}
+
+form:has(#trabalhador:checked) #camposTrabalhador {
+  display: block;
+}

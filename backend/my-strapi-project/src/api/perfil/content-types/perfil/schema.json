@@ -23,11 +23,19 @@
     "foto": {
       "type": "media",
       "multiple": true,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "tipoUsuario": {
       "type": "enumeration",
-      "enum": ["cliente", "prestador"]
+      "enum": [
+        "cliente",
+        "prestador"
+      ]
     },
     "solicitacoesComoCliente": {
       "type": "relation",

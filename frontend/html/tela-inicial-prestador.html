@@ -14,20 +14,13 @@
 </div>
 
 <script>
-const perfil =
-JSON.parse(
-localStorage.getItem("profile")
-);
+const perfil = JSON.parse(localStorage.getItem("profile"));
 
-document.querySelector(
-".perfil-usuario h2"
-).innerText =
-perfil?.nomeCompleto;
+document.querySelector(".perfil-usuario h2").innerText =
+    perfil?.nomeCompleto || "Usuário";
 
-document.querySelector(
-".perfil-usuario small"
-).innerText =
-perfil?.tipoUsuario;
+document.querySelector(".perfil-usuario small").innerText =
+    perfil?.tipoUsuario || "prestador";
 </script>
 
 </body>

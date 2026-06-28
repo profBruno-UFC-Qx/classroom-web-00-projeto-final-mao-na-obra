@@ -46,9 +46,12 @@ botaoSair?.addEventListener("click", () => {
   });
 
   try {
-    const response = await getJson("/solicitacaos?populate=*");
-    solicitacoes = response?.data || [];
-    renderizarSolicitacoes(solicitacoes, filtroAtual, container);
+    const response = await getJson(
+      `/solicitacaos?filters[prestador][id][$eq]=${perfil.id}&populate=*`
+    );
+    const novasSolicitacoes =
+      response?.data || [];
+    renderizarSolicitacoes(novasSolicitacoes, filtroAtual, container);
   } catch (error) {
     console.error(error);
     container.innerHTML =
@@ -85,8 +88,14 @@ function renderizarSolicitacoes(solicitacoes, filtroAtual, container) {
     .map((solicitacao) => {
       const dados = solicitacao.attributes || solicitacao;
       const status = dados.statusSolicitacao || "PENDENTE";
-      const cliente = dados.cliente?.data?.attributes || null;
-      const nomeCliente = cliente?.nomeCompleto || "Cliente";
+      const cliente =
+        dados.cliente?.data ||
+        null;
+
+      const nomeCliente =
+        cliente?.nomeCompleto ||
+        cliente?.attributes?.nomeCompleto ||
+        "Cliente";
       const mensagem =
         stripHtml(dados.mensagem || "") || "Solicitação sem observação.";
       const valor = "R$ 0,00";
@@ -99,7 +108,10 @@ function renderizarSolicitacoes(solicitacoes, filtroAtual, container) {
         : "Não informado";
       const statusClass = getPrestadorStatusClass(status);
       const label = normalizeStatus(status);
-      const foto = getMediaUrl(cliente?.foto);
+      const foto = getMediaUrl(
+        cliente?.foto ||
+        cliente?.attributes?.foto
+      );
 
       return `
         <section class="card card-agendamento mb-4">
@@ -141,7 +153,10 @@ function renderizarSolicitacoes(solicitacoes, filtroAtual, container) {
           data: { statusSolicitacao: status },
         });
         alert("Status atualizado com sucesso.");
-        const response = await getJson("/solicitacaos?populate=*");
+        const response =
+          await getJson(
+          `/solicitacaos?filters[prestador][id][$eq]=${perfil.id}&populate=*`
+          );
         solicitacoes = response?.data || [];
         renderizarSolicitacoes(solicitacoes, filtroAtual, container);
       } catch (error) {

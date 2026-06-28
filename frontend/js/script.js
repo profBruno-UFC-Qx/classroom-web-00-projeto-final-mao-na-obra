@@ -80,7 +80,7 @@ async function carregarPaginaInicial() {
 
   try {
     const categoriasResponse = await getJson("/categoria-servicos?populate=*");
-    const perfisResponse = await getJson("/perfils?populate=*");
+    const perfisResponse = await getJson("/perfils?populate[foto]=*&populate[servicos]=*");
 
     const categorias = (categoriasResponse?.data || []).map(
       (item) => item.attributes || item,

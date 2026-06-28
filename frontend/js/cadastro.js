@@ -55,9 +55,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const perfilPayload = {
         data: {
           nomeCompleto: nome,
-          telefone: telefone,
-          descricao: complemento || "",
-          tipoUsuario: tipoUsuario,
+          telefone,
+          descricao: [
+            {
+              type: "paragraph",
+              children: [{ text: complemento || "" }],
+            },
+          ],
+          tipoUsuario,
           users_permissions_user: user.id,
         },
       };
@@ -81,7 +86,12 @@ document.addEventListener("DOMContentLoaded", () => {
       saveAuthSession(user, token, perfil);
 
       alert("Cadastro realizado com sucesso!");
-      window.location.href = "tela-inicial-oficial.html";
+
+      if (tipoUsuario === "prestador") {
+        window.location.href = "tela-inicial-prestador.html";
+      } else {
+        window.location.href = "tela-inicial-oficial.html";
+      }
     } catch (error) {
       console.error(error);
       alert(

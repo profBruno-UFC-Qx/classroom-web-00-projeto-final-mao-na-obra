@@ -54,6 +54,12 @@
       "relation": "oneToMany",
       "target": "api::solicitacao.solicitacao",
       "mappedBy": "prestador"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "perfil"
     }
   }
 }

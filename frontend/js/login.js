@@ -52,32 +52,27 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         profile =
-          profileResponse?.data?.[0]?.attributes ||
-          profileResponse?.data?.[0] ||
-          null;
+          profileResponse?.data?.[0]
+            ? {
+                id: profileResponse.data[0].id,
+                ...profileResponse.data[0].attributes,
+              }
+            : null;
       }
       catch (profileError) {
         console.warn(profileError);
       }
 
-      saveAuthSession(
-        user,
-        token,
-        profile,
-      );
+      saveAuthSession(user, token, profile);
 
       alert("Login realizado com sucesso!");
 
-      if (
-        profile?.tipoUsuario ===
-        "prestador"
-      ) {
-        window.location.href =
-          "tela-inicial-prestador.html";
-      }
-      else {
-        window.location.href =
-          "tela-inicial-oficial.html";
+      const tipo = profile?.tipoUsuario;
+
+      if (tipo === "prestador") {
+        window.location.href = "tela-inicial-prestador.html";
+      } else {
+        window.location.href = "tela-inicial-oficial.html";
       }
     } catch (error) {
       console.error(error);

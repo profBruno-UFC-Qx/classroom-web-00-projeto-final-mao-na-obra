@@ -593,16 +593,9 @@ export interface ApiServicoServico extends Struct.CollectionTypeSchema {
   };
   attributes: {
     ativo: Schema.Attribute.Boolean;
-    categoria: Schema.Attribute.Enumeration<
-      [
-        'Jardinagem',
-        'Limpeza',
-        'Manuten\u00E7\u00E3o',
-        'Constru\u00E7\u00E3o',
-        'Eletricista',
-        'Encanador',
-        'Pintor',
-      ]
+    categoria: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::categoria-servico.categoria-servico'
     >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

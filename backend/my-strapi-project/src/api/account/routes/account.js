@@ -8,6 +8,16 @@ module.exports = {
       handler: 'account.delete',
       config: {
         prefix: '',
+        auth: false,
+      },
+    },
+    {
+      method: 'POST',
+      path: '/account/create-profile',
+      handler: 'account.createProfile',
+      config: {
+        prefix: '',
+        auth: false,
       },
     },
   ],

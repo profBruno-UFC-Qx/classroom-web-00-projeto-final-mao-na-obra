@@ -21,16 +21,10 @@
       "type": "blocks"
     },
     "categoria": {
-      "type": "enumeration",
-      "enum": [
-        "Jardinagem",
-        "Limpeza",
-        "Manutenção",
-        "Construção",
-        "Eletricista",
-        "Encanador",
-        "Pintor"
-      ]
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::categoria-servico.categoria-servico",
+      "inversedBy": "servicos"
     },
     "ativo": {
       "type": "boolean"

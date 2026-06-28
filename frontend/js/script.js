@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  redirectIfUnauthenticated(["login.html", "cadastro.html"]);
+  //redirectIfUnauthenticated(["login.html", "cadastro.html"]);
 
   const linkAgendamentos = document.querySelector("#linkAgendamentos");
 
@@ -18,13 +18,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     const perfil = getStoredProfile();
     const usuario = getStoredUser();
 
-    if (perfil?.attributes?.nomeCompleto || usuario?.username) {
-      nomeUsuario.textContent =
-        perfil?.attributes?.nomeCompleto || usuario?.username || "Usuário";
+    const nome =
+      perfil?.nomeCompleto ||
+      perfil?.attributes?.nomeCompleto ||
+      usuario?.username;
+
+    if (nomeUsuario) {
+      nomeUsuario.textContent = nome;
     }
 
-    if (perfil?.attributes?.tipoUsuario) {
-      tipoUsuario.textContent = perfil.attributes.tipoUsuario;
+    if (tipoUsuario) {
+      tipoUsuario.textContent =
+        perfil?.tipoUsuario ||
+        perfil?.attributes?.tipoUsuario ||
+        "cliente";
     }
   }
 
@@ -39,16 +46,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  const searchForm = document.querySelector(".caixa-busca");
+  const searchInput = document.querySelector("#servico_procurado");
+
+  if (searchForm) {
+    searchForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const termo = searchInput?.value?.trim();
+
+      if (!termo) {
+        await carregarPaginaInicial();
+        return;
+      }
+
+      await pesquisarServicos(termo);
+    });
+  }
+
   await carregarPaginaInicial();
 });
 
 async function carregarPaginaInicial() {
   const containerCategorias = document.querySelector("#categorias ul");
   const containerProfissionais = document.querySelector("#profissionais ul");
-
-  if (!containerCategorias || !containerProfissionais) {
-    return;
-  }
 
   const categoriasFallback = [
     { nome: "Limpeza" },
@@ -71,29 +91,59 @@ async function carregarPaginaInicial() {
     },
   ];
 
+  if (containerCategorias) {
+    try {
+      const categoriasResponse = await getJson("/categoria-servicos?populate=*");
+      const categorias = (categoriasResponse?.data || []).map(
+        (item) => item.attributes || item,
+      );
+      renderizarCategorias(
+        categorias.length ? categorias : categoriasFallback,
+        containerCategorias,
+      );
+    } catch (error) {
+      console.error("Erro ao buscar categorias:", error);
+      renderizarCategorias(categoriasFallback, containerCategorias);
+    }
+  }
+
+  if (containerProfissionais) {
+    try {
+      const perfisResponse = await getJson(
+        "/perfils?populate=*&filters[tipoUsuario][$eq]=prestador",
+      );
+      const perfis = (perfisResponse?.data || []).map(
+        (item) => item.attributes || item,
+      );
+      renderizarProfissionais(
+        perfis.length ? perfis : perfisFallback,
+        containerProfissionais,
+      );
+    } catch (error) {
+      console.error("Erro ao buscar perfis:", error);
+      renderizarProfissionais(perfisFallback, containerProfissionais);
+    }
+  }
+}
+
+async function pesquisarServicos(termo) {
+  const containerResultados = document.querySelector("#profissionais ul");
+  if (!containerResultados) {
+    return;
+  }
+
   try {
-    const categoriasResponse = await getJson("/categoria-servicos?populate=*");
-    const perfisResponse = await getJson("/perfils?populate=*");
-
-    const categorias = (categoriasResponse?.data || []).map(
-      (item) => item.attributes || item,
-    );
-    const perfis = (perfisResponse?.data || []).map(
-      (item) => item.attributes || item,
+    const query = encodeURIComponent(termo);
+    const response = await getJson(
+      `/servicos?filters[$or][0][titulo][$containsi]=${query}&filters[$or][1][categoria][$containsi]=${query}&populate=prestador&pagination[pageSize]=100`,
     );
 
-    renderizarCategorias(
-      categorias.length ? categorias : categoriasFallback,
-      containerCategorias,
-    );
-    renderizarProfissionais(
-      perfis.length ? perfis : perfisFallback,
-      containerProfissionais,
-    );
+    const servicos = (response?.data || []).map((item) => item.attributes || item);
+    renderizarServicos(servicos, containerResultados, termo);
   } catch (error) {
-    console.error(error);
-    renderizarCategorias(categoriasFallback, containerCategorias);
-    renderizarProfissionais(perfisFallback, containerProfissionais);
+    console.error("Erro ao buscar serviços:", error);
+    containerResultados.innerHTML =
+      '<li class="col-12"><p class="text-muted">Não foi possível buscar serviços no momento.</p></li>';
   }
 }
 
@@ -137,7 +187,9 @@ function renderizarProfissionais(perfis, container) {
         stripHtml(perfil.descricao || "") || "Especialista em serviços.";
       const foto = getMediaUrl(perfil.foto);
       const especialidade =
-        perfil.servicos?.data?.[0]?.attributes?.titulo || "Serviço disponível";
+        perfil.servicos?.[0]?.titulo ||
+        perfil.servicos?.data?.[0]?.attributes?.titulo ||
+        "Serviço disponível";
 
       return `
         <li class="col-md-6 col-lg-4">
@@ -152,16 +204,66 @@ function renderizarProfissionais(perfis, container) {
     .join("");
 }
 
-function obterIconeCategoria(nome) {
-  const mapa = {
-    jardinagem: "bi-flower1",
-    limpeza: "bi-house",
-    manutenção: "bi-tools",
-    construção: "bi-hammer",
-    eletricista: "bi-lightning",
-    encanador: "bi-droplet",
-    pintor: "bi-brush",
-  };
+function renderizarServicos(servicos, container, termo) {
+  if (!servicos.length) {
+    container.innerHTML =
+      `<li class="col-12"><p class="text-muted">Nenhum serviço encontrado para "${termo}".</p></li>`;
+    return;
+  }
 
-  return mapa[nome.toLowerCase()] || "bi-briefcase";
+  container.innerHTML = servicos
+    .map((servico) => {
+      const titulo = servico.titulo || "Serviço";
+      const categoria = servico.categoria || "Sem categoria";
+      const descricao =
+        stripHtml(servico.descricao) ||
+        stripHtml(servico.prestador?.data?.attributes?.descricao) ||
+        stripHtml(servico.prestador?.descricao) ||
+        "Descrição não disponível.";
+      const prestador =
+        servico.prestador?.data?.attributes?.nomeCompleto ||
+        servico.prestador?.nomeCompleto ||
+        "Prestador não informado";
+      const foto = getMediaUrl(servico.prestador?.data?.attributes?.foto || servico.prestador?.foto);
+
+      return `
+        <li class="col-md-6 col-lg-4">
+          <article class="cartao-profissional text-center">
+            <img src="${foto}" alt="${prestador}" />
+            <h3>${prestador}</h3>
+            <p class="text-secondary">${titulo}</p>
+            <p class="avaliacao">${descricao}</p>
+            <small class="text-muted">${categoria}</small>
+          </article>
+        </li>`;
+    })
+    .join("");
+}
+
+function obterIconeCategoria(nome) {
+  const normalized = (nome || "").toLowerCase();
+
+  if (normalized.includes("jardin")) {
+    return "bi-flower1";
+  }
+  if (normalized.includes("limpeza")) {
+    return "bi-house";
+  }
+  if (normalized.includes("manuten")) {
+    return "bi-tools";
+  }
+  if (normalized.includes("constru")) {
+    return "bi-hammer";
+  }
+  if (normalized.includes("eletric")) {
+    return "bi-lightning";
+  }
+  if (normalized.includes("encan")) {
+    return "bi-droplet";
+  }
+  if (normalized.includes("pint")) {
+    return "bi-brush";
+  }
+
+  return "bi-briefcase";
 }

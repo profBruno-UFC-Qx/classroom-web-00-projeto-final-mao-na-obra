@@ -15,16 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const emailInput = form.querySelector('input[type="email"]');
     const passwordInput = form.querySelector('input[type="password"]');
-    const perfilCliente = document.getElementById("cliente");
-    const perfilTrabalhador = document.getElementById("trabalhador");
+    // const perfilCliente = document.getElementById("cliente");
+    // const perfilTrabalhador = document.getElementById("trabalhador");
 
     const email = emailInput?.value?.trim();
     const password = passwordInput?.value;
-    const perfil = perfilCliente?.checked
-      ? "cliente"
-      : perfilTrabalhador?.checked
-        ? "prestador"
-        : "cliente";
+    // const perfil = perfilCliente?.checked
+    //   ? "cliente"
+    //   : perfilTrabalhador?.checked
+    //     ? "prestador"
+    //     : "cliente";
 
     if (!email || !password) {
       alert("Informe o e-mail e a senha para entrar.");
@@ -44,24 +44,38 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error("Resposta de autenticação inválida.");
       }
 
+      // Store the token before profile fetch so getJson can send authorization if needed.
+      saveAuthSession(user, token);
+
       let profile = null;
 
       try {
         const profileResponse = await getJson(
           `/perfils?filters[users_permissions_user][id][$eq]=${user.id}&populate=*`,
         );
-        profile = profileResponse?.data?.[0] || null;
+
+        profile =
+          profileResponse?.data?.[0]
+            ? {
+                id: profileResponse.data[0].id,
+                ...profileResponse.data[0].attributes,
+              }
+            : null;
       } catch (profileError) {
-        console.warn(
-          "Não foi possível carregar o perfil após o login.",
-          profileError.message,
-        );
+        console.warn(profileError);
       }
 
       saveAuthSession(user, token, profile);
 
       alert("Login realizado com sucesso!");
-      window.location.href = "tela-inicial-oficial.html";
+
+      const tipo = profile?.tipoUsuario;
+
+      if (tipo === "prestador") {
+        window.location.href = "tela-inicial-prestador.html";
+      } else {
+        window.location.href = "tela-inicial-oficial.html";
+      }
     } catch (error) {
       console.error(error);
       alert(
@@ -71,3 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// if (profile?.tipoUsuario === "prestador") {
+//   // mostrar funcionalidades de prestador
+// }
+
+// if (profile?.tipoUsuario === "cliente") {
+//   // mostrar funcionalidades de cliente
+// }

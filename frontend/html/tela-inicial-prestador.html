@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Prestador</title>
+</head>
+
+<body>
+<h1>Tela do Prestador</h1>
+
+<div class="perfil-usuario">
+    <h2></h2>
+    <small></small>
+</div>
+
+<script>
+const perfil = JSON.parse(localStorage.getItem("profile"));
+
+document.querySelector(".perfil-usuario h2").innerText =
+    perfil?.nomeCompleto || "Usuário";
+
+document.querySelector(".perfil-usuario small").innerText =
+    perfil?.tipoUsuario || "prestador";
+</script>
+
+</body>
+</html>

@@ -1,3 +1,17 @@
+const ADDRESS_KEY = "contrataki_endereco";
+
+function getStoredAddress() {
+  return localStorage.getItem(ADDRESS_KEY) || "";
+}
+
+function saveStoredAddress(endereco) {
+  if (endereco) {
+    localStorage.setItem(ADDRESS_KEY, endereco);
+  } else {
+    localStorage.removeItem(ADDRESS_KEY);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   redirectIfUnauthenticated(["login.html", "cadastro.html"]);
 
@@ -10,17 +24,33 @@ document.addEventListener("DOMContentLoaded", async () => {
   let usuarioAtual = getStoredUser();
 
   try {
-    const response = await getJson("/perfils?populate=*");
-    perfilAtual = (response?.data || [])[0];
+    const response = await getJson(
+      `/perfils?filters[users_permissions_user][id][$eq]=${usuarioAtual.id}&populate=*`
+    );
 
-    if (perfilAtual) {
-      const dados = perfilAtual.attributes || perfilAtual;
-      document.getElementById("nome").value = dados.nomeCompleto || "";
-      document.getElementById("email").value = usuarioAtual?.email || "";
-      document.getElementById("telefone").value = dados.telefone || "";
-    }
+    perfilAtual = response?.data?.[0]
+      ? { id: response.data[0].id, ...response.data[0].attributes }
+      : null;
+
+    const dados = perfilAtual || {};
+
+    document.getElementById("nome").value =
+      dados.nomeCompleto || usuarioAtual?.username || usuarioAtual?.email || "";
+
+    document.getElementById("email").value =
+      usuarioAtual?.email || usuarioAtual?.username || "";
+
+    document.getElementById("telefone").value =
+      dados.telefone || "";
+
+    document.getElementById("endereco").value =
+      dados.endereco || getStoredAddress();
   } catch (error) {
     console.error(error);
+
+    document.getElementById("email").value =
+      usuarioAtual?.email || usuarioAtual?.username || "";
+    document.getElementById("endereco").value = getStoredAddress();
   }
 
   formDados?.addEventListener("submit", async (evento) => {
@@ -29,28 +59,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nome = document.getElementById("nome").value.trim();
     const email = document.getElementById("email").value.trim();
     const telefone = document.getElementById("telefone").value.trim();
+    const endereco = document.getElementById("endereco").value.trim();
 
     try {
-      if (perfilAtual?.id) {
-        await putJson(`/perfils/${perfilAtual.id}`, {
-          data: {
-            nomeCompleto: nome,
-            telefone,
-            descricao: [{ type: "paragraph", children: [{ text: "" }] }],
-            tipoUsuario: "cliente ",
-          },
-        });
-      } else {
-        const resposta = await postJson("/perfils", {
-          data: {
-            nomeCompleto: nome,
-            telefone,
-            descricao: [{ type: "paragraph", children: [{ text: "" }] }],
-            tipoUsuario: "cliente ",
-          },
-        });
-        perfilAtual = resposta?.data || null;
+      const perfilPayload = {
+        nomeCompleto: nome,
+        telefone,
+        tipoUsuario: perfilAtual?.tipoUsuario || "cliente",
+      };
+
+      if (!perfilAtual?.id) {
+        perfilPayload.descricao = [{ type: "paragraph", children: [{ text: "" }] }];
+
+        if (usuarioAtual?.id) {
+          perfilPayload.users_permissions_user = { connect: usuarioAtual.id };
+        }
       }
+
+      if (perfilAtual?.id) {
+        await putJson(`/perfils/${perfilAtual.id}`, { data: perfilPayload });
+      } else {
+        const resposta = await postJson("/perfils", { data: perfilPayload });
+        perfilAtual = resposta?.data
+          ? { id: resposta.data.id, ...resposta.data.attributes }
+          : null;
+      }
+
+      saveStoredAddress(endereco);
 
       if (usuarioAtual?.id) {
         await putJson(`/users/${usuarioAtual.id}`, { username: email, email });
@@ -143,9 +178,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-      if (usuarioAtual?.id) {
-        await deleteJson(`/users/${usuarioAtual.id}`);
-      }
+      // Call backend route that deletes the authenticated user's perfil and user
+      await postJson(`/account/delete`, {});
       clearAuthSession();
       alert("Conta excluída com sucesso.");
       window.location.href = "login.html";

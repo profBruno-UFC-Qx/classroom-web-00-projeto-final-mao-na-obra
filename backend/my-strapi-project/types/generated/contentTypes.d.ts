@@ -547,6 +547,7 @@ export interface ApiPerfilPerfil extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     descricao: Schema.Attribute.Blocks;
+    endereco: Schema.Attribute.String;
     foto: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -573,6 +574,10 @@ export interface ApiPerfilPerfil extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -588,16 +593,9 @@ export interface ApiServicoServico extends Struct.CollectionTypeSchema {
   };
   attributes: {
     ativo: Schema.Attribute.Boolean;
-    categoria: Schema.Attribute.Enumeration<
-      [
-        'Jardinagem',
-        'Limpeza',
-        'Manuten\u00E7\u00E3o',
-        'Constru\u00E7\u00E3o',
-        'Eletricista',
-        'Encanador',
-        'Pintor',
-      ]
+    categoria: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::categoria-servico.categoria-servico'
     >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

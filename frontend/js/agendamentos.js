@@ -1,6 +1,33 @@
 document.addEventListener("DOMContentLoaded", async () => {
   redirectIfUnauthenticated(["login.html", "cadastro.html"]);
 
+  const nomeUsuario = document.querySelector(".perfil-usuario h6");
+const tipoUsuario = document.querySelector(".perfil-usuario small");
+const botaoSair = document.getElementById("botaoSair");
+
+const perfil = getStoredProfile();
+const usuario = getStoredUser();
+
+if (nomeUsuario) {
+  nomeUsuario.textContent =
+    perfil?.nomeCompleto ||
+    perfil?.attributes?.nomeCompleto ||
+    usuario?.username ||
+    "Usuário";
+}
+
+if (tipoUsuario) {
+  tipoUsuario.textContent =
+    perfil?.tipoUsuario ||
+    perfil?.attributes?.tipoUsuario ||
+    "cliente";
+}
+
+botaoSair?.addEventListener("click", () => {
+  clearAuthSession();
+  window.location.href = "login.html";
+});
+
   const listaAgendamentos = document.querySelector(".lista-agendamentos");
   const botoesFiltro = document.querySelectorAll(".botao-filtro");
 
@@ -27,9 +54,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   try {
-    const response = await getJson("/solicitacaos?populate=*");
-    solicitacoes = response?.data || [];
-    renderizarSolicitacoes(solicitacoes, filtroAtual, listaAgendamentos);
+    const response = await getJson(
+      `/solicitacaos?filters[cliente][id][$eq]=${perfil.id}&populate=*`
+    );
+    const novasSolicitacoes =
+      response?.data || [];
+    renderizarSolicitacoes(novasSolicitacoes, filtroAtual, listaAgendamentos);
   } catch (error) {
     console.error(error);
     listaAgendamentos.innerHTML =
@@ -70,11 +100,12 @@ function renderizarSolicitacoes(solicitacoes, filtroAtual, container) {
     .map((solicitacao) => {
       const dados = solicitacao.attributes || solicitacao;
       const status = dados.statusSolicitacao || "PENDENTE";
-      const prestador =
-        dados.prestador?.data?.[0]?.attributes ||
-        dados.prestador?.data?.attributes ||
-        null;
-      const nomePrestador = prestador?.nomeCompleto || "Prestador";
+      const prestador = dados.prestador?.data || null;
+
+      const nomePrestador =
+        prestador?.nomeCompleto ||
+        prestador?.attributes?.nomeCompleto ||
+        "Prestador";
       const descricao =
         stripHtml(dados.mensagem || "") || "Solicitação em análise.";
       const data = formatDate(dados.dataDesejada);
@@ -86,7 +117,10 @@ function renderizarSolicitacoes(solicitacoes, filtroAtual, container) {
         : "Não informado";
       const statusClass = getStatusClass(status);
       const statusLabel = normalizeStatus(status);
-      const foto = getMediaUrl(prestador?.foto);
+      const foto = getMediaUrl(
+        prestador?.foto ||
+        prestador?.attributes?.foto
+      );
 
       return `
         <article class="card cartao-agendamento mb-4">
@@ -133,7 +167,9 @@ function renderizarSolicitacoes(solicitacoes, filtroAtual, container) {
           data: { statusSolicitacao: "RECUSADA" },
         });
         alert("Solicitação cancelada com sucesso.");
-        const response = await getJson("/solicitacaos?populate=*");
+        const response = await getJson(
+          `/solicitacaos?filters[cliente][id][$eq]=${perfil.id}&populate=*`
+        );
         solicitacoes = response?.data || [];
         renderizarSolicitacoes(solicitacoes, filtroAtual, container);
       } catch (error) {

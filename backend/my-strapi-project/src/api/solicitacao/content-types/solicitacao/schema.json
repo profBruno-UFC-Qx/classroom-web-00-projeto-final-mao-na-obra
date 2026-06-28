@@ -22,7 +22,12 @@
     },
     "statusSolicitacao": {
       "type": "enumeration",
-      "enum": ["PENDENTE", "ACEITA", "RECUSADA", "CONCLUIDA"]
+      "enum": [
+        "PENDENTE",
+        "ACEITA",
+        "RECUSADA",
+        "CONCLUIDA"
+      ]
     },
     "cliente": {
       "type": "relation",

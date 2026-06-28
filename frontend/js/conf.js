@@ -178,9 +178,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-      if (usuarioAtual?.id) {
-        await deleteJson(`/users/${usuarioAtual.id}`);
-      }
+      // Call backend route that deletes the authenticated user's perfil and user
+      await postJson(`/account/delete`, {});
       clearAuthSession();
       alert("Conta excluída com sucesso.");
       window.location.href = "login.html";

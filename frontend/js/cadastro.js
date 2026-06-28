@@ -51,27 +51,26 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!user || !token) {
         throw new Error("Não foi possível criar o usuário.");
       }
+      saveAuthSession(user, token);
 
       const perfilPayload = {
-        data: {
-          nomeCompleto: nome,
-          telefone,
-          descricao: [
-            {
-              type: "paragraph",
-              children: [{ text: complemento || "" }],
-            },
-          ],
-          tipoUsuario,
-          users_permissions_user: { connect: user.id },
-        },
+        nomeCompleto: nome,
+        telefone,
+        endereco,
+        descricao: [
+          {
+            type: "paragraph",
+            children: [{ text: complemento || "" }],
+          },
+        ],
+        tipoUsuario,
       };
 
       let perfil = null;
 
       try {
         const perfilResponse = await postJson(
-          "/perfils",
+          "/perfils/with-user",
           perfilPayload,
         );
 

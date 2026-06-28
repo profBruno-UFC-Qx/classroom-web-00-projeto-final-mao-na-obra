@@ -215,7 +215,11 @@ function renderizarServicos(servicos, container, termo) {
     .map((servico) => {
       const titulo = servico.titulo || "Serviço";
       const categoria = servico.categoria || "Sem categoria";
-      const descricao = stripHtml(servico.descricao || "") || "Descrição não disponível.";
+      const descricao =
+        stripHtml(servico.descricao) ||
+        stripHtml(servico.prestador?.data?.attributes?.descricao) ||
+        stripHtml(servico.prestador?.descricao) ||
+        "Descrição não disponível.";
       const prestador =
         servico.prestador?.data?.attributes?.nomeCompleto ||
         servico.prestador?.nomeCompleto ||
@@ -225,11 +229,11 @@ function renderizarServicos(servicos, container, termo) {
       return `
         <li class="col-md-6 col-lg-4">
           <article class="cartao-profissional text-center">
-            <img src="${foto}" alt="${titulo}" />
-            <h3>${titulo}</h3>
-            <p class="text-secondary">${categoria}</p>
+            <img src="${foto}" alt="${prestador}" />
+            <h3>${prestador}</h3>
+            <p class="text-secondary">${titulo}</p>
             <p class="avaliacao">${descricao}</p>
-            <small class="text-muted">${prestador}</small>
+            <small class="text-muted">${categoria}</small>
           </article>
         </li>`;
     })

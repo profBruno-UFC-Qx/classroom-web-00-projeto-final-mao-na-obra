@@ -547,6 +547,7 @@ export interface ApiPerfilPerfil extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     descricao: Schema.Attribute.Blocks;
+    endereco: Schema.Attribute.String;
     foto: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true

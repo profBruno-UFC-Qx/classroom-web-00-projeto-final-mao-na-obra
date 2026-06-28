@@ -17,6 +17,9 @@
     "telefone": {
       "type": "string"
     },
+    "endereco": {
+      "type": "string"
+    },
     "descricao": {
       "type": "blocks"
     },

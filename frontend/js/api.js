@@ -178,6 +178,23 @@ function stripHtml(value) {
     return value.replace(/<[^>]+>/g, "").trim();
   }
 
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => stripHtml(item))
+      .filter(Boolean)
+      .join(" ")
+      .trim();
+  }
+
+  if (typeof value === "object") {
+    if (typeof value.text === "string") {
+      return value.text.trim();
+    }
+    if (Array.isArray(value.children)) {
+      return stripHtml(value.children);
+    }
+  }
+
   return "";
 }
 

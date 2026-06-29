@@ -570,7 +570,9 @@ export interface ApiPerfilPerfil extends Struct.CollectionTypeSchema {
       'api::solicitacao.solicitacao'
     >;
     telefone: Schema.Attribute.String;
-    tipoUsuario: Schema.Attribute.Enumeration<['cliente', 'prestador']>;
+    tipoUsuario: Schema.Attribute.Enumeration<
+      ['cliente', 'prestador', 'admin']
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

@@ -182,23 +182,40 @@ function renderizarProfissionais(perfis, container) {
 
   container.innerHTML = profissionais
     .map((perfil) => {
+      const perfilId = perfil.id || "";
       const nome = perfil.nomeCompleto || "Profissional";
-      const descricao =
-        stripHtml(perfil.descricao || "") || "Especialista em serviços.";
+      const descricaoRaw = perfil.descricao;
+      let descricao = "Especialista em serviços.";
+      
+      // Se descricao é string, usa direto
+      if (typeof descricaoRaw === "string" && descricaoRaw.trim()) {
+        descricao = descricaoRaw.trim();
+      } else {
+        // Se for formato de bloco, extrai o texto
+        const extraida = extractDescriptionText(descricaoRaw);
+        if (extraida) {
+          descricao = extraida;
+        }
+      }
+      
       const foto = getMediaUrl(perfil.foto);
       const especialidade =
         perfil.servicos?.[0]?.titulo ||
         perfil.servicos?.data?.[0]?.attributes?.titulo ||
         "Serviço disponível";
+      
+      const perfilUrl = perfilId ? `perfil.html?id=${perfilId}` : "#";
 
       return `
         <li class="col-md-6 col-lg-4">
-          <article class="cartao-profissional text-center">
-            <img src="${foto}" alt="${nome}" />
-            <h3>${nome}</h3>
-            <p class="text-secondary">${especialidade}</p>
-            <p class="avaliacao">${descricao}</p>
-          </article>
+          <a href="${perfilUrl}" class="text-decoration-none">
+            <article class="cartao-profissional text-center">
+              <img src="${foto}" alt="${nome}" />
+              <h3>${nome}</h3>
+              <p class="text-secondary">${especialidade}</p>
+              <p class="avaliacao">${descricao}</p>
+            </article>
+          </a>
         </li>`;
     })
     .join("");
@@ -215,26 +232,48 @@ function renderizarServicos(servicos, container, termo) {
     .map((servico) => {
       const titulo = servico.titulo || "Serviço";
       const categoria = servico.categoria || "Sem categoria";
-      const descricao =
-        stripHtml(servico.descricao) ||
-        stripHtml(servico.prestador?.data?.attributes?.descricao) ||
-        stripHtml(servico.prestador?.descricao) ||
-        "Descrição não disponível.";
+      
+      let descricao = "Descrição não disponível.";
+      const descricaoServico = servico.descricao;
+      const descricaoPrestador = servico.prestador?.data?.attributes?.descricao || servico.prestador?.descricao;
+      
+      // Tenta usar descrição do serviço se for string
+      if (typeof descricaoServico === "string" && descricaoServico.trim()) {
+        descricao = descricaoServico.trim();
+      } else if (typeof descricaoPrestador === "string" && descricaoPrestador.trim()) {
+        // Se não, usa descrição do prestador se for string
+        descricao = descricaoPrestador.trim();
+      } else {
+        // Fallback para extração de bloco
+        const desc1 = extractDescriptionText(descricaoServico);
+        const desc2 = extractDescriptionText(descricaoPrestador);
+        if (desc1) {
+          descricao = desc1;
+        } else if (desc2) {
+          descricao = desc2;
+        }
+      }
+      
+      const prestadorId = servico.prestador?.data?.id || servico.prestador?.id;
       const prestador =
         servico.prestador?.data?.attributes?.nomeCompleto ||
         servico.prestador?.nomeCompleto ||
         "Prestador não informado";
       const foto = getMediaUrl(servico.prestador?.data?.attributes?.foto || servico.prestador?.foto);
+      
+      const perfilUrl = prestadorId ? `perfil.html?id=${prestadorId}` : "#";
 
       return `
         <li class="col-md-6 col-lg-4">
-          <article class="cartao-profissional text-center">
-            <img src="${foto}" alt="${prestador}" />
-            <h3>${prestador}</h3>
-            <p class="text-secondary">${titulo}</p>
-            <p class="avaliacao">${descricao}</p>
-            <small class="text-muted">${categoria}</small>
-          </article>
+          <a href="${perfilUrl}" class="text-decoration-none">
+            <article class="cartao-profissional text-center">
+              <img src="${foto}" alt="${prestador}" />
+              <h3>${prestador}</h3>
+              <p class="text-secondary">${titulo}</p>
+              <p class="avaliacao">${descricao}</p>
+              <small class="text-muted">${categoria}</small>
+            </article>
+          </a>
         </li>`;
     })
     .join("");

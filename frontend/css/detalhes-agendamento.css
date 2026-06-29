@@ -1,0 +1,237 @@
+body {
+    background: #f5f7fb;
+}
+
+/* Estilo da marca no cabeçalho */
+.marca-sistema {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.card {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+    transition: .2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.titulo-pagina {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.codigo-agendamento {
+    color: #6c757d;
+}
+
+.link-voltar {
+    text-decoration: none;
+    color: #0d6efd;
+}
+
+/* ========== STATUS COM CORES ========== */
+
+.status-agendamento {
+    padding: .4rem 1.2rem;
+    border-radius: 999px;
+    font-size: .9rem;
+    font-weight: 600;
+    height: fit-content;
+}
+
+.status-pendente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-aceito {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-em-andamento {
+    background: #cfe2ff;
+    color: #084298;
+}
+
+.status-concluido {
+    background: #d1f7dc;
+    color: #198754;
+}
+
+.status-cancelado {
+    background: #f8d7da;
+    color: #842029;
+}
+
+/* ========== LINHA DO TEMPO COM CORES ========== */
+
+.linha-tempo {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.linha-tempo li {
+    position: relative;
+    padding-left: 3rem;
+    margin-bottom: 2rem;
+    min-height: 50px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Círculo e linha base */
+.linha-tempo li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #dee2e6;
+    border: 3px solid #dee2e6;
+    transition: all .3s;
+}
+
+.linha-tempo li::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 20px;
+    width: 2px;
+    height: calc(100% + 12px);
+    background: #dee2e6;
+}
+
+.linha-tempo li:last-child::after {
+    display: none;
+}
+
+/* ===== CORES PARA CADA ESTADO DA LINHA DO TEMPO ===== */
+
+/* Concluído (verde) */
+.linha-tempo li.concluido {
+    color: #198754;
+}
+
+.linha-tempo li.concluido::before {
+    background: #198754;
+    border-color: #198754;
+}
+
+.linha-tempo li.concluido::after {
+    background: #198754;
+}
+
+/* Ativo / Atual (azul) */
+.linha-tempo li.ativo {
+    color: #0d6efd;
+    font-weight: 700;
+}
+
+.linha-tempo li.ativo::before {
+    background: #0d6efd;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.25);
+}
+
+.linha-tempo li.ativo::after {
+    background: #0d6efd;
+}
+
+/* Pendente (amarelo) */
+.linha-tempo li.pendente {
+    color: #856404;
+}
+
+.linha-tempo li.pendente::before {
+    background: #ffc107;
+    border-color: #ffc107;
+}
+
+.linha-tempo li.pendente::after {
+    background: #dee2e6;
+}
+
+/* Cancelado (vermelho) */
+.linha-tempo li.cancelado {
+    color: #842029;
+}
+
+.linha-tempo li.cancelado::before {
+    background: #dc3545;
+    border-color: #dc3545;
+}
+
+.linha-tempo li.cancelado::after {
+    background: #dc3545;
+}
+
+/* ===== ÍCONES OPCIONAIS PARA A LINHA DO TEMPO ===== */
+
+.linha-tempo li::before {
+    content: "✓";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.linha-tempo li.pendente::before {
+    content: "⏳";
+    background: #ffc107;
+    border-color: #ffc107;
+    color: #856404;
+    font-size: 10px;
+}
+
+.linha-tempo li.ativo::before {
+    content: "●";
+    background: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+    font-size: 14px;
+}
+
+.linha-tempo li.cancelado::before {
+    content: "✕";
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+    font-size: 10px;
+}
+
+/* ===== OUTROS ESTILOS ===== */
+
+.imagem-profissional {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.rotulo-informacao {
+    color: #6c757d;
+    margin-bottom: .3rem;
+    font-size: .9rem;
+}
+
+.btn-primary,
+.btn-outline-danger {
+    border-radius: 12px;
+    padding: .8rem;
+    font-weight: 600;
+}
+
+.rodape {
+    background: #04142e;
+    color: white;
+}

@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categoria_servicos",
+  "info": {
+    "singularName": "categoria-servico",
+    "pluralName": "categoria-servicos",
+    "displayName": "CategoriaServico"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome": {
+      "type": "string",
+      "required": true
+    },
+    "servicos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::servico.servico"
+    },
+    "Descricao": {
+      "type": "blocks"
+    }
+  }
+}

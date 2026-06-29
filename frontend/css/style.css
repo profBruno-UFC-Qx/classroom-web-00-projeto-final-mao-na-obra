@@ -1,0 +1,100 @@
+/* ===== Tela inicial ===== */
+
+.marca-sistema{
+    font-size:32px;
+    font-weight:700;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+.rodape{
+    background:#04142e;
+    color:white;
+}
+
+/* ===== MENU PERFIL ===== */
+
+.menu-perfil{
+    width:220px;
+    border:none;
+    border-radius:14px;
+    padding:.5rem 0;
+    box-shadow:0 4px 15px rgba(0,0,0,.12);
+}
+
+.perfil-usuario{
+    padding:.5rem 1rem;
+}
+
+.dropdown-item{
+    display:flex;
+    align-items:center;
+    gap:.7rem;
+    padding:.7rem 1rem;
+}
+
+.dropdown-item:hover{
+    background:#f5f7fb;
+}
+
+/* ===== HOME ===== */
+
+.destaque-principal{
+    background:#f5f5f5;
+    padding:4rem 1rem;
+}
+
+.cartao-categoria{
+    background:#0d6efd;
+    color:white;
+    padding:2rem 1rem;
+    text-align:center;
+    border-radius:10px;
+    text-decoration:none;
+    display:block;
+    transition:.2s;
+}
+
+.cartao-categoria:hover{
+    background:#0b5ed7;
+    color:white;
+    transform:translateY(-3px);
+}
+
+.cartao-categoria h3{
+    font-size:1rem;
+    margin-top:.5rem;
+}
+
+.cartao-profissional{
+    background:white;
+    padding:1.5rem;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,.05);
+    transition:.2s;
+}
+
+.cartao-profissional:hover{
+    transform:translateY(-3px);
+}
+
+.cartao-profissional img{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:1rem;
+}
+
+.avaliacao{
+    color:#f5b042;
+}
+
+.visually-hidden{
+    position:absolute;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}

@@ -215,3 +215,57 @@ function getMediaUrl(value) {
 
   return "https://picsum.photos/150";
 }
+
+function extractDescriptionText(descricao) {
+  if (!descricao) {
+    return "";
+  }
+
+  // Se for string, retorna direto
+  if (typeof descricao === "string") {
+    return descricao.trim();
+  }
+
+  // Se for objeto com estrutura de bloco do Strapi
+  if (typeof descricao === "object") {
+    // Trata formato { type: "doc", content: [...] }
+    if (descricao.type === "doc" && Array.isArray(descricao.content)) {
+      return descricao.content
+        .flatMap((block) => {
+          if (block.type === "paragraph" && Array.isArray(block.content)) {
+            return block.content
+              .map((item) => item.text || "")
+              .filter(Boolean);
+          }
+          return [];
+        })
+        .join(" ")
+        .trim();
+    }
+
+    // Trata formato com children
+    if (Array.isArray(descricao.children)) {
+      return descricao.children
+        .map((item) => item.text || "")
+        .filter(Boolean)
+        .join(" ")
+        .trim();
+    }
+
+    // Trata objeto simples com text
+    if (typeof descricao.text === "string") {
+      return descricao.text.trim();
+    }
+  }
+
+  // Se for array, extrai texto de cada item
+  if (Array.isArray(descricao)) {
+    return descricao
+      .map((item) => extractDescriptionText(item))
+      .filter(Boolean)
+      .join(" ")
+      .trim();
+  }
+
+  return "";
+}

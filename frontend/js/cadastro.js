@@ -97,15 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         nomeCompleto: nome,
         telefone,
         endereco,
-        descricao: {
-          type: "doc",
-          content: [
-            {
-              type: "paragraph",
-              content: [{ type: "text", text: complemento || "" }],
-            },
-          ],
-        },
+        descricao: "",
         tipoUsuario,
         categoria: tipoUsuario === "prestador" ? categoria : undefined,
         preco: tipoUsuario === "prestador" ? preco : undefined,

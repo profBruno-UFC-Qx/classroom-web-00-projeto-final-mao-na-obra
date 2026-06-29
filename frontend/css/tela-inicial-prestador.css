@@ -1,0 +1,4 @@
+body { background:#f5f7fb; }
+.card-home { border:none; border-radius:20px; box-shadow:0 2px 10px rgba(0,0,0,.05); transition: 0.3s; }
+.card-home:hover { transform: translateY(-5px); }
+.btn-action { padding: 15px; border-radius: 15px; font-weight: 600; }

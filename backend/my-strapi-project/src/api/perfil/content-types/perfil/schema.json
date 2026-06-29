@@ -37,7 +37,8 @@
       "type": "enumeration",
       "enum": [
         "cliente",
-        "prestador"
+        "prestador",
+        "admin"
       ]
     },
     "solicitacoesComoCliente": {

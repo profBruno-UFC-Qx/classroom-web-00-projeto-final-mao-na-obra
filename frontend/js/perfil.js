@@ -3,14 +3,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const botaoContratar = document.getElementById("botaoContratar");
   const parametros = new URLSearchParams(window.location.search);
-  const perfilId = parametros.get("id");
+  const perfilPrestadorId = parametros.get("id");
+
+  let perfilPrestador = null;
 
   try {
     const response = await getJson(
-      perfilId ? `/perfils/${perfilId}?populate=*` : "/perfils?populate=*",
+      perfilPrestadorId ? `/perfils/${perfilPrestadorId}?populate=*` : "/perfils?populate=*",
     );
-    const perfil = perfilId ? response?.data : (response?.data || [])[0];
-    preencherPerfil(perfil);
+    perfilPrestador = perfilPrestadorId ? response?.data : (response?.data || [])[0];
+    preencherPerfil(perfilPrestador);
   } catch (error) {
     console.error(error);
     alert(error.message || "Não foi possível carregar o perfil.");
@@ -18,27 +20,65 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (botaoContratar) {
     botaoContratar.addEventListener("click", async () => {
-      const mensagem = prompt(
-        "Descreva o serviço que deseja solicitar:",
-        "Gostaria de contratar este profissional.",
-      );
-      const endereco = prompt("Informe o endereço para o atendimento:", "");
-
-      if (!mensagem || !endereco) {
-        alert("Preencha a mensagem e o endereço para continuar.");
-        return;
-      }
-
       try {
-        await postJson("/solicitacaos", {
-          data: {
-            mensagem: [{ type: "paragraph", children: [{ text: mensagem }] }],
-            endereco,
-            dataDesejada: new Date().toISOString(),
-            statusSolicitacao: "PENDENTE",
+        // Obter perfil do usuário logado (cliente)
+        const perfilCliente = getStoredProfile();
+        if (!perfilCliente?.id) {
+          alert("Você precisa estar logado para contratar um serviço.");
+          return;
+        }
+
+        const mensagem = prompt(
+          "Descreva o serviço que deseja solicitar:",
+          "Gostaria de contratar este profissional.",
+        );
+        if (!mensagem) return;
+
+        const endereco = prompt("Informe o endereço para o atendimento:", "");
+        if (!endereco) {
+          alert("Informe um endereço para continuar.");
+          return;
+        }
+
+        const dataSolicitada = prompt(
+          "Informe a data desejada (YYYY-MM-DD):",
+          new Date().toISOString().split("T")[0],
+        );
+        if (!dataSolicitada) {
+          alert("Informe uma data para continuar.");
+          return;
+        }
+
+        const clienteId = perfilCliente.id;
+        const prestadorId = perfilPrestador?.id;
+
+        if (!prestadorId) {
+          alert("Não foi possível identificar o prestador.");
+          return;
+        }
+
+        // Criar solicitação
+        const solicitacaoPayload = {
+          mensagem: {
+            type: "doc",
+            content: [
+              {
+                type: "paragraph",
+                content: [{ type: "text", text: mensagem }],
+              },
+            ],
           },
-        });
-        alert("Solicitação enviada com sucesso!");
+          endereco,
+          dataDesejada: dataSolicitada,
+          statusSolicitacao: "PENDENTE",
+          cliente: clienteId,
+          prestador: prestadorId,
+        };
+
+        const response = await postJson("/solicitacaos", solicitacaoPayload);
+        
+        alert("Solicitação enviada com sucesso! Acompanhe em 'Meus Agendamentos'.");
+        window.location.href = "agendamentos-cliente.html";
       } catch (error) {
         console.error(error);
         alert(error.message || "Não foi possível enviar a solicitação.");
@@ -54,9 +94,21 @@ function preencherPerfil(perfil) {
 
   const dados = perfil.attributes || perfil;
   const nome = dados.nomeCompleto || "Profissional";
-  const descricao =
-    stripHtml(dados.descricao || "") ||
-    "Especialista em serviços com atendimento de qualidade.";
+  
+  let descricao = "Especialista em serviços com atendimento de qualidade.";
+  const descricaoRaw = dados.descricao;
+  
+  // Se descricao é string, usa direto
+  if (typeof descricaoRaw === "string" && descricaoRaw.trim()) {
+    descricao = descricaoRaw.trim();
+  } else {
+    // Se for formato de bloco, extrai o texto
+    const extraida = extractDescriptionText(descricaoRaw);
+    if (extraida) {
+      descricao = extraida;
+    }
+  }
+  
   const foto = getMediaUrl(dados.foto);
   const servicos = (dados.servicos?.data || [])
     .map((servico) => servico.attributes?.titulo || servico.titulo)

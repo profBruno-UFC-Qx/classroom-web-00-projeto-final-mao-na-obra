@@ -84,8 +84,22 @@ module.exports = {
         return ctx.send(this.transformResponse ? this.transformResponse(existingPerfil) : existingPerfil);
       }
 
+      // Garante que descrição é um bloco válido do Strapi
+      let descricaoBloco = descricao;
+      if (typeof descricao === 'string') {
+        descricaoBloco = {
+          type: 'doc',
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: descricao }],
+            },
+          ],
+        };
+      }
+
       const perfil = await strapi.entityService.create('api::perfil.perfil', {
-        data: { nomeCompleto, telefone, endereco, descricao, tipoUsuario },
+        data: { nomeCompleto, telefone, endereco, descricao: descricaoBloco, tipoUsuario },
       });
 
       if (tipoUsuario === 'prestador' && categoria) {
@@ -101,14 +115,14 @@ module.exports = {
         await strapi.entityService.create('api::servico.servico', {
           data: {
             titulo: `Serviço de ${categoriaEntity?.nome || categoriaId}`,
-            categoria: { connect: [categoriaId] },
+            categoria: categoriaId,
             preco: Number.isFinite(precoNumero) ? precoNumero : null,
             descricao: descricao || {
               type: 'doc',
               content: [{ type: 'paragraph', content: [{ type: 'text', text: '' }] }],
             },
             ativo: true,
-            prestador: { connect: [perfil.id] },
+            prestador: perfil.id,
           },
         });
       }

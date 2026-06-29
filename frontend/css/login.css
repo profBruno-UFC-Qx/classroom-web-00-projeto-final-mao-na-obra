@@ -1,0 +1,28 @@
+body {
+  padding: 1rem;
+}
+
+main.card {
+  transition: transform 0.2s ease;
+}
+
+main.card:hover {
+  transform: translateY(-2px);
+}
+
+header h1 {
+  letter-spacing: 1px;
+}
+
+.input-group-text {
+  min-width: 48px;
+  justify-content: center;
+}
+
+footer a {
+  transition: opacity 0.2s ease;
+}
+
+footer a:hover {
+  opacity: 0.8;
+}

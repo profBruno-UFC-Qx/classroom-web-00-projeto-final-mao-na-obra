@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "servicos",
+  "info": {
+    "singularName": "servico",
+    "pluralName": "servicos",
+    "displayName": "Servico"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titulo": {
+      "type": "string"
+    },
+    "preco": {
+      "type": "decimal"
+    },
+    "descricao": {
+      "type": "blocks"
+    },
+    "categoria": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::categoria-servico.categoria-servico",
+      "inversedBy": "servicos"
+    },
+    "ativo": {
+      "type": "boolean"
+    },
+    "prestador": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::perfil.perfil",
+      "inversedBy": "servicos"
+    }
+  }
+}

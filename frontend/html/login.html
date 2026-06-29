@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Login - ContratAki</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <!-- CSS próprio -->
+    <link rel="stylesheet" href="../css/login.css" />
+  </head>
+
+  <body
+    class="bg-primary bg-gradient min-vh-100 d-flex justify-content-center align-items-center"
+  >
+    <main
+      class="card shadow-lg border-0 rounded-4 p-4"
+      style="max-width: 500px; width: 100%"
+    >
+      <!-- LOGO -->
+      <header class="text-center mb-4">
+        <h1 class="fw-bold text-primary">ContratAki</h1>
+
+        <p class="text-secondary mb-0">Faça login na plataforma</p>
+      </header>
+
+      <form>
+        <!-- EMAIL -->
+        <section class="mb-3">
+          <label class="form-label fw-semibold">Email</label>
+
+          <section class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-envelope"></i>
+            </span>
+
+            <input
+              type="email"
+              class="form-control form-control-lg"
+              placeholder="Digite seu email"
+            />
+          </section>
+        </section>
+
+        <!-- SENHA -->
+        <section class="mb-4">
+          <label class="form-label fw-semibold">Senha</label>
+
+          <section class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-lock"></i>
+            </span>
+
+            <input
+              type="password"
+              class="form-control form-control-lg"
+              placeholder="Digite sua senha"
+            />
+          </section>
+        </section>
+
+        <!-- BOTAO -->
+        <button type="submit" class="btn btn-primary btn-lg w-100 rounded-4">
+          Entrar
+        </button>
+      </form>
+
+      <!-- CADASTRO -->
+      <footer>
+        <section class="text-center mt-4">
+          <span class="text-secondary">Não possui conta?</span>
+
+          <a href="/frontend/html/cadastro.html" class="text-decoration-none fw-semibold">
+            Cadastre-se
+          </a>
+        </section>
+
+        <nav class="text-center mt-3">
+          <a
+            href="/frontend/html/tela-inicial-oficial.html"
+            class="text-decoration-none small text-primary"
+          >
+            Continuar sem entrar
+          </a>
+        </nav>
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/login.js"></script>
+  </body>
+</html>

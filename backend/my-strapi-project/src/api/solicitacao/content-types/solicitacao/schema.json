@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "solicitacaos",
+  "info": {
+    "singularName": "solicitacao",
+    "pluralName": "solicitacaos",
+    "displayName": "Solicitacao"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "mensagem": {
+      "type": "blocks"
+    },
+    "endereco": {
+      "type": "string"
+    },
+    "dataDesejada": {
+      "type": "date"
+    },
+    "statusSolicitacao": {
+      "type": "enumeration",
+      "enum": [
+        "PENDENTE",
+        "ACEITA",
+        "RECUSADA",
+        "CONCLUIDA"
+      ]
+    },
+    "cliente": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::perfil.perfil",
+      "inversedBy": "solicitacoesComoCliente"
+    },
+    "prestador": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::perfil.perfil",
+      "inversedBy": "solicitacoesComoPrestador"
+    }
+  }
+}

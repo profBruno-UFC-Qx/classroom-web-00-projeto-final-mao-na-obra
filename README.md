@@ -97,27 +97,64 @@ Contratação
 
 **Frontend:**
 
-Lista as tecnologias, frameworks e bibliotecas utilizados.
+- JavaScript 
+- HTML5 
+- CSS3
+- BootStrap
 
 **Backend:**
 
-Lista as tecnologias, frameworks e bibliotecas utilizados.
+- Node.js 
+- Strapi v5 
+- JavaScript 
+- SQLite
+
+
 
 
 ## :shipit: Operações implementadas para cada entidade da aplicação
 
-
-| Entidade| Criação | Leitura | Atualização | Remoção |
-| --- | --- | --- | --- | --- |
-| Entidade 1 | X |  X  |  | X |
-| Entidade 2 | X |    |  X | X |
-| Entidade 3 | X |    |  |  |
+| Entidade | Criação | Leitura | Atualização | Remoção |
+| --- | :---: | :---: | :---: | :---: |
+| Usuário | X | X |  | X |
+| Perfil | X | X | X | X |
+| Categoria de Serviço | X | X | X | X |
+| Serviço | X | X | X | X |
+| Solicitação | X | X | X | X |
 
 > Lembre-se que é necessário implementar o CRUD de pelo menos duas entidades.
 
+---
+
 ## :neckbeard: Rotas da API REST utilizadas
 
-| Método HTTP | URL |
-| --- | --- |
-| GET | api/entidade1/|
-| POST | api/entidade2 |
+| Método HTTP | URL | Descrição |
+| --- | --- | --- |
+| POST | `/api/auth/local` | Login do usuário. |
+| POST | `/api/auth/local/register` | Cadastro de usuário. |
+| POST | `/api/account/create-profile` | Cria o perfil do usuário autenticado. |
+| POST | `/api/account/delete` | Exclui a conta do usuário autenticado. |
+| GET | `/api/admin/users` | Lista todos os usuários (Administrador). |
+| DELETE | `/api/admin/users/:documentId` | Exclui um usuário (Administrador). |
+| GET | `/api/perfils` | Lista todos os perfis. |
+| GET | `/api/perfils/:documentId` | Busca um perfil pelo documentId. |
+| POST | `/api/perfils` | Cria um perfil. |
+| PUT | `/api/perfils/:documentId` | Atualiza um perfil. |
+| DELETE | `/api/perfils/:documentId` | Remove um perfil. |
+| GET | `/api/categoria-servicos` | Lista as categorias de serviço. |
+| GET | `/api/categoria-servicos/:documentId` | Busca uma categoria. |
+| POST | `/api/categoria-servicos` | Cria uma categoria. |
+| PUT | `/api/categoria-servicos/:documentId` | Atualiza uma categoria. |
+| DELETE | `/api/categoria-servicos/:documentId` | Remove uma categoria. |
+| GET | `/api/servicos` | Lista os serviços. |
+| GET | `/api/servicos/:documentId` | Busca um serviço. |
+| POST | `/api/servicos` | Cria um serviço. |
+| PUT | `/api/servicos/:documentId` | Atualiza um serviço. |
+| DELETE | `/api/servicos/:documentId` | Remove um serviço. |
+| GET | `/api/solicitacaos` | Lista as solicitações. |
+| GET | `/api/solicitacaos/:documentId` | Busca uma solicitação. |
+| POST | `/api/solicitacaos` | Cria uma solicitação. |
+| PUT | `/api/solicitacaos/:documentId` | Atualiza uma solicitação. |
+| DELETE | `/api/solicitacaos/:documentId` | Remove uma solicitação. |
+
+Ao acessar a plataforma, o usuário é direcionado para a tela de login. Caso ainda não possua uma conta, pode selecionar a opção "Cadastre-se" e preencher as informações necessárias para realizar o cadastro. Também é possível continuar como visitante, acessando as funcionalidades públicas da plataforma sem a necessidade de autenticação.

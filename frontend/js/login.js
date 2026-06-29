@@ -71,7 +71,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const tipo = profile?.tipoUsuario;
 
-      if (tipo === "prestador") {
+      if (tipo === "admin") {
+        window.location.href = "admin.html";
+      } else if (tipo === "prestador") {
         window.location.href = "tela-inicial-prestador.html";
       } else {
         window.location.href = "tela-inicial-oficial.html";
